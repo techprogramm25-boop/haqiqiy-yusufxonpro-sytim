@@ -15,6 +15,7 @@
             --card: rgba(17, 24, 39, 0.8); 
             --red: #ef4444; 
             --gold: #f59e0b;
+            --blue: #3b82f6;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
@@ -62,6 +63,10 @@
         .term-icon { position: fixed; top: 30px; right: 40px; color: var(--accent); font-size: 32px; cursor: pointer; z-index: 2000; transition: 0.3s; }
         .term-icon:hover { transform: rotate(90deg); color: var(--white); }
         #admin-panel { display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.99); z-index: 5000; padding: 10%; border-left: 5px solid var(--accent); }
+
+        /* --- REKLAMA STILI --- */
+        .reklama-box { border: 2px solid var(--blue); padding: 40px; border-radius: 20px; background: rgba(59, 130, 246, 0.05); position: relative; overflow: hidden; }
+        .reklama-tag { position: absolute; top: 0; left: 0; background: var(--blue); color: white; padding: 5px 20px; font-size: 12px; font-weight: bold; letter-spacing: 2px; border-radius: 0 0 10px 0; }
     </style>
 </head>
 <body>
@@ -110,27 +115,18 @@
             <div style="margin-top:40px;"><a href="#history" class="btn">Daho bilan tanishing</a></div>
         </section>
 
-        <section id="history" data-aos="fade-right">
-            <p class="num">01. Men Haqimda</p>
-            <h2 class="title" style="font-size: 40px;">Daho Yo'li</h2>
-            <div class="grid">
-                <div class="card" data-aos="zoom-in">
-                    <h3>Erta Qadam</h3>
-                    <p>Dasturlash olamiga juda yosh kirganman va bu yo'lda to'xtamayman.</p>
+        <section id="reklama" data-aos="zoom-in">
+            <p class="num">SPECIAL AD</p>
+            <div class="reklama-box">
+                <div class="reklama-tag">REKLAMA</div>
+                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                    <i class="fas fa-graduation-cap" style="font-size: 50px; color: var(--blue);"></i>
+                    <h2 style="color: white; font-size: 35px;">TeamIT.uz</h2>
                 </div>
-                <div class="card" data-aos="zoom-in" data-aos-delay="200">
-                    <h3>Jizzax Faxri</h3>
-                    <p>O'zbekiston IT sohasini dunyo darajasiga olib chiqish mening maqsadim.</p>
-                </div>
-            </div>
-        </section>
-
-        <section data-aos="fade-left">
-            <p class="num">02. Texnologiyalar</p>
-            <h2 class="title" style="font-size: 40px;">Mening Bilimlarim</h2>
-            <div class="grid">
-                <div class="card"><h3>Python & AI</h3><p>Aqlli tizimlar va botlar yaratish.</p></div>
-                <div class="card"><h3>Web Dev</h3><p>Zamonaviy va professional saytlar qurish.</p></div>
+                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 25px;">
+                    Dasturlashni eng kuchli mutaxassislardan o'rganmoqchimisiz? TeamIT o'quv markazi — bu kelajak daholarini tayyorlaydigan maskan. Men ham shu yerdaman! Sifatli ta'lim, zamonaviy metodika va real loyihalar.
+                </p>
+                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">TEAMIT.UZ GA O'TISH</a>
             </div>
         </section>
 
@@ -147,13 +143,11 @@
         <section id="kabinet" data-aos="fade-up">
             <p class="num">04. Shaxsiy Kabinet</p>
             <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
-            
             <div class="premium-box" data-aos="flip-up">
                 <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-crown"></i> Premium Gmail (VIP)</h3>
                 <p style="color:white; margin-bottom:10px;">VIP mijozlar uchun maxsus aloqa liniyasi.</p>
                 <p style="font-family:monospace; color:var(--gold); font-size: 18px;">techprogramm25@gmail.com</p>
             </div>
-
             <div style="margin-top:50px; background:var(--card); padding:40px; border-radius:15px;" data-aos="fade-up">
                 <h3 style="color:white; margin-bottom:25px;">Xabar yuborish</h3>
                 <input type="text" id="sender" placeholder="Ismingiz">
