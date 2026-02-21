@@ -59,14 +59,9 @@
         input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #0f172a; border: 1px solid #1e293b; color: white; border-radius: 8px; outline: none; transition: 0.3s; }
         input:focus { border-color: var(--accent); }
 
-        /* --- ADMIN TERMINAL --- */
         .term-icon { position: fixed; top: 30px; right: 40px; color: var(--accent); font-size: 32px; cursor: pointer; z-index: 2000; transition: 0.3s; }
         .term-icon:hover { transform: rotate(90deg); color: var(--white); }
         #admin-panel { display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.99); z-index: 5000; padding: 10%; border-left: 5px solid var(--accent); }
-
-        /* --- REKLAMA STILI --- */
-        .reklama-box { border: 2px solid var(--blue); padding: 40px; border-radius: 20px; background: rgba(59, 130, 246, 0.05); position: relative; overflow: hidden; }
-        .reklama-tag { position: absolute; top: 0; left: 0; background: var(--blue); color: white; padding: 5px 20px; font-size: 12px; font-weight: bold; letter-spacing: 2px; border-radius: 0 0 10px 0; }
     </style>
 </head>
 <body>
@@ -115,37 +110,53 @@
             <div style="margin-top:40px;"><a href="#history" class="btn">Daho bilan tanishing</a></div>
         </section>
 
-        <section id="reklama" data-aos="zoom-in">
-            <p class="num">SPECIAL AD</p>
-            <div class="reklama-box">
-                <div class="reklama-tag">REKLAMA</div>
-                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
-                    <i class="fas fa-graduation-cap" style="font-size: 50px; color: var(--blue);"></i>
-                    <h2 style="color: white; font-size: 35px;">TeamIT.uz</h2>
+        <section id="history" data-aos="fade-right">
+            <p class="num">01. Men Haqimda</p>
+            <h2 class="title" style="font-size: 40px;">Daho Yo'li</h2>
+            <div class="grid">
+                <div class="card" data-aos="zoom-in">
+                    <h3>Erta Qadam</h3>
+                    <p>Dasturlash olamiga juda yosh kirganman va bu yo'lda to'xtamayman.</p>
                 </div>
-                <p style="font-size: 18px; line-height: 1.8; margin-bottom: 25px;">
-                    Dasturlashni eng kuchli mutaxassislardan o'rganmoqchimisiz? TeamIT o'quv markazi — bu kelajak daholarini tayyorlaydigan maskan. Men ham shu yerdaman! Sifatli ta'lim, zamonaviy metodika va real loyihalar.
-                </p>
-                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">TEAMIT.UZ GA O'TISH</a>
+                <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>Jizzax Faxri</h3>
+                    <p>O'zbekiston IT sohasini dunyo darajasiga olib chiqish mening maqsadim.</p>
+                </div>
+            </div>
+        </section>
+
+        <section data-aos="fade-left">
+            <p class="num">02. Texnologiyalar</p>
+            <h2 class="title" style="font-size: 40px;">Mening Bilimlarim</h2>
+            <div class="grid">
+                <div class="card"><h3>Python & AI</h3><p>Aqlli tizimlar va botlar yaratish.</p></div>
+                <div class="card"><h3>Web Dev</h3><p>Zamonaviy va professional saytlar qurish.</p></div>
+            </div>
+        </section>
+
+        <section id="reklama" data-aos="zoom-in">
+            <p class="num">03. Reklama</p>
+            <div class="card" style="border: 2px solid var(--blue); background: rgba(59, 130, 246, 0.05);">
+                <h3 style="color: var(--blue);"><i class="fas fa-star"></i> TeamIT.uz</h3>
+                <p style="margin: 20px 0;">Eng zo'r o'quv markazda daho bo'lib yetishing! Dasturlashni hoziroq o'rganing.</p>
+                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">BORING O'QING!</a>
             </div>
         </section>
 
         <section id="my-sites" data-aos="fade-up">
-            <p class="num">03. Portfoliolarim</p>
+            <p class="num">04. Portfoliolarim</p>
             <h2 class="title" style="font-size: 40px;">Mening Saytlarim</h2>
             <div class="card" style="text-align: center; border: 2px dashed var(--accent);">
-                <h3 style="margin-bottom: 25px;">Daho Yusufxonning Maxsus Loyihasi</h3>
-                <p style="margin-bottom: 30px;">Mening asosiy loading sahifam va boshqa ishlarim bilan tanishish uchun tugmani bosing.</p>
-                <a href="https://yusufxonpro-loading.vercel.app/" class="btn" style="background: var(--accent); color: var(--bg); border: none;">MENING SAYTIMGA KIRISH</a>
+                <h3 style="margin-bottom: 25px;">Loyihalarim To'plami</h3>
+                <a href="https://yusufxonpro-loading.vercel.app/" class="btn" style="background: var(--accent); color: var(--bg); border: none;">SAYTIMGA KIRISH</a>
             </div>
         </section>
 
         <section id="kabinet" data-aos="fade-up">
-            <p class="num">04. Shaxsiy Kabinet</p>
+            <p class="num">05. Shaxsiy Kabinet</p>
             <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
             <div class="premium-box" data-aos="flip-up">
                 <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-crown"></i> Premium Gmail (VIP)</h3>
-                <p style="color:white; margin-bottom:10px;">VIP mijozlar uchun maxsus aloqa liniyasi.</p>
                 <p style="font-family:monospace; color:var(--gold); font-size: 18px;">techprogramm25@gmail.com</p>
             </div>
             <div style="margin-top:50px; background:var(--card); padding:40px; border-radius:15px;" data-aos="fade-up">
@@ -165,7 +176,6 @@
     <script>
         let messages = [];
         AOS.init({ duration: 1000, once: false, mirror: true });
-
         window.onload = () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
@@ -174,12 +184,10 @@
                 document.getElementById('content').style.opacity = '1';
             }, 5500);
         };
-
         function toggleAdmin() {
             const p = document.getElementById('admin-panel');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
         }
-
         function sendData() {
             const s = document.getElementById('sender').value;
             const m = document.getElementById('message').value;
@@ -190,7 +198,6 @@
                 document.getElementById('message').value = "";
             }
         }
-
         function openVault() {
             if(prompt("ROOT_KOD:") === "20152015") {
                 document.getElementById('logs').style.display = 'block';
