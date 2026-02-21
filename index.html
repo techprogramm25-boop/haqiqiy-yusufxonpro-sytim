@@ -19,7 +19,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* --- DAHO LOADER (B -> ✕ -> Y) --- */
+        /* --- DAHO LOADER --- */
         #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 0.8s; }
         .loader-ring { width: 120px; height: 120px; border: 4px solid transparent; border-top: 4px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; position: absolute; }
         .char { position: absolute; font-size: 55px; font-weight: 900; opacity: 0; }
@@ -27,25 +27,6 @@
         .x { color: var(--red); animation: fI 0.4s 2.2s forwards, fO 0.3s 3s forwards; }
         .y { color: var(--accent); animation: fI 0.5s 3.2s forwards; text-shadow: 0 0 20px var(--accent); }
         .f-name { margin-top: 150px; color: var(--white); letter-spacing: 10px; opacity: 0; animation: fI 1s 4s forwards; font-size: 18px; }
-
-        /* --- SIZ AYTGAN TUGMA UCHUN STIL --- */
-        #daho-btn-container {
-            display: none;
-            margin-top: 40px;
-            z-index: 10001;
-            opacity: 0;
-            transition: 1s;
-        }
-        .special-btn {
-            padding: 15px 35px;
-            background: var(--accent);
-            color: var(--bg);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            box-shadow: 0 0 15px var(--accent);
-            font-size: 18px;
-        }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fI { to { opacity: 1; } }
@@ -66,13 +47,11 @@
         .btn { padding: 16px 35px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.4s; border-radius: 4px; }
         .btn:hover { background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
 
-        /* --- CARDS & GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: var(--card); padding: 35px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); transition: 0.4s; }
         .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); }
         .card h3 { color: var(--white); margin-bottom: 15px; font-size: 22px; }
 
-        /* --- KABINET & PREMIUM --- */
         .premium-box { border: 2px solid var(--gold); padding: 30px; border-radius: 15px; margin-top: 30px; position: relative; background: rgba(245, 158, 11, 0.05); }
         .premium-box::after { content: "PULLIK"; position: absolute; top: 15px; right: -35px; background: var(--gold); color: black; padding: 5px 45px; transform: rotate(45deg); font-weight: bold; font-size: 12px; }
         
@@ -93,10 +72,6 @@
         <span class="char x">✕</span>
         <span class="char y">Y</span>
         <div class="f-name">YUSUFXON AXMATOV</div>
-        
-        <div id="daho-btn-container">
-            <a href="https://yusufxonpro-loading.vercel.app/" class="special-btn">MENING SAYTIM</a>
-        </div>
     </div>
 
     <div class="term-icon" onclick="toggleAdmin()"><i class="fas fa-terminal"></i></div>
@@ -159,8 +134,18 @@
             </div>
         </section>
 
+        <section id="my-sites" data-aos="fade-up">
+            <p class="num">03. Portfoliolarim</p>
+            <h2 class="title" style="font-size: 40px;">Mening Saytlarim</h2>
+            <div class="card" style="text-align: center; border: 2px dashed var(--accent);">
+                <h3 style="margin-bottom: 25px;">Daho Yusufxonning Maxsus Loyihasi</h3>
+                <p style="margin-bottom: 30px;">Mening asosiy loading sahifam va boshqa ishlarim bilan tanishish uchun tugmani bosing.</p>
+                <a href="https://yusufxonpro-loading.vercel.app/" class="btn" style="background: var(--accent); color: var(--bg); border: none;">MENING SAYTIMGA KIRISH</a>
+            </div>
+        </section>
+
         <section id="kabinet" data-aos="fade-up">
-            <p class="num">03. Shaxsiy Kabinet</p>
+            <p class="num">04. Shaxsiy Kabinet</p>
             <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
             
             <div class="premium-box" data-aos="flip-up">
@@ -185,24 +170,10 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         let messages = [];
-        
-        AOS.init({
-            duration: 1000,
-            once: false,
-            mirror: true
-        });
+        AOS.init({ duration: 1000, once: false, mirror: true });
 
         window.onload = () => {
             setTimeout(() => {
-                // Loader ring'ni yashiramiz
-                document.querySelector('.loader-ring').style.display = 'none';
-                
-                // Tugmani ko'rsatamiz
-                const btnBox = document.getElementById('daho-btn-container');
-                btnBox.style.display = 'block';
-                setTimeout(() => { btnBox.style.opacity = '1'; }, 100);
-
-                // Asosiy saytni ochamiz
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 800);
