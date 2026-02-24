@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Yusufxon Axmatov | Daho Dev Portfolio</title>
+    <meta name="description" content="Yusufxon Axmatov - Professional Full-stack dasturchi va Daho Dev asoschisi. Web-ilovalar va murakkab tizimlar yaratish bo'yicha portfolio.">
+    <meta name="keywords" content="Yusufxon Axmatov, Yusufxon Pro, Daho Dev, dasturchi, portfolio, uzbek developer, yusufxonpro.uz">
+    <meta name="author" content="Yusufxon Axmatov">
+    
+    <meta property="og:title" content="Yusufxon Axmatov | Daho Dev Portfolio">
+    <meta property="og:description" content="Zamonaviy va mukammal web-yechimlar. Professional dasturlash xizmatlari.">
+    <meta property="og:image" content="https://yusufxonpro.uz/favicon.png"> <meta property="og:url" content="https://yusufxonpro.uz">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+
     <style>
         :root { 
             --bg: #030712; 
@@ -58,147 +71,62 @@
         .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); }
         .card h3 { color: var(--white); margin-bottom: 15px; font-size: 22px; }
 
-        /* RASM STILI */
         .my-photo { width: 100%; max-width: 400px; border-radius: 20px; border: 3px solid var(--accent); margin-top: 20px; box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); }
 
         .premium-box { border: 2px solid var(--gold); padding: 30px; border-radius: 15px; margin-top: 30px; position: relative; background: rgba(245, 158, 11, 0.05); }
-        .premium-box::after { content: "PULLIK"; position: absolute; top: 15px; right: -35px; background: var(--gold); color: black; padding: 5px 45px; transform: rotate(45deg); font-weight: bold; font-size: 12px; }
         
         input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #0f172a; border: 1px solid #1e293b; color: white; border-radius: 8px; outline: none; transition: 0.3s; }
         input:focus { border-color: var(--accent); }
-
-        .term-icon { position: fixed; top: 30px; right: 40px; color: var(--accent); font-size: 32px; cursor: pointer; z-index: 2000; transition: 0.3s; }
-        .term-icon:hover { transform: rotate(90deg); color: var(--white); }
-        #admin-panel { display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.99); z-index: 5000; padding: 10%; border-left: 5px solid var(--accent); }
     </style>
 </head>
 <body>
 
-    <div class="top-menu">
-        <a href="#hero" class="menu-btn">Bosh sahifa</a>
-        <a href="#photos" class="menu-btn"><i class="fas fa-image"></i> Rasmlarim</a>
-    </div>
-
     <div id="loader">
         <div class="loader-ring"></div>
-        <span class="char b">B</span>
-        <span class="char x">✕</span>
-        <span class="char y">Y</span>
-        <div class="f-name">YUSUFXON AXMATOV</div>
-    </div>
-
-    <div class="term-icon" onclick="toggleAdmin()"><i class="fas fa-terminal"></i></div>
-
-    <div id="admin-panel">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 style="color:white; font-family:monospace;">> Daho Terminal v2.0</h2>
-            <i class="fas fa-times" style="color:var(--accent); cursor:pointer; font-size: 30px;" onclick="toggleAdmin()"></i>
-        </div>
-        <button class="btn" onclick="openVault()" style="margin-top:20px">TERMINALGA_KIRISH</button>
-        <div id="logs" style="margin-top:40px; display:none; color:var(--accent); font-family:monospace;">
-            <p>> Ma'lumotlar bazasi ulanmoqda...</p>
-            <div id="msg-list" style="color:white; margin-top:20px"></div>
-        </div>
+        <div class="char b">D</div>
+        <div class="char x">A</div>
+        <div class="char y">H</div>
+        <div class="f-name">YUSUFXON PRO</div>
     </div>
 
     <div class="side side-l">
         <div class="social">
-            <a href="https://github.com/techprogramm25-boop" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/yusufxonpro/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://t.me/yusufxon_pro"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/Yusufxon-Axmatov"><i class="fab fa-github"></i></a>
         </div>
-        <div class="v-line"></div>
-    </div>
-    <div class="side side-r">
-        <p style="writing-mode: vertical-rl; margin-bottom: 25px; color: var(--accent); font-family: monospace; letter-spacing: 2px;">techprogramm25@gmail.com</p>
         <div class="v-line"></div>
     </div>
 
     <div id="content">
-        <section id="hero" data-aos="fade-up">
-            <p class="num">Assalomu alaykum, men —</p>
+        <nav class="top-menu">
+            <a href="#about" class="menu-btn">Men haqimda</a>
+            <a href="#projects" class="menu-btn">Loyihalar</a>
+        </nav>
+
+        <section id="hero">
+            <p class="num">01. Assalomu alaykum, men</p>
             <h1 class="title">Yusufxon Axmatov.</h1>
-            <h2 class="title" style="color:var(--text); font-size: clamp(25px, 5vw, 45px);">Men daho dasturchiman.</h2>
-            <p style="max-width: 650px; font-size: 20px; line-height: 1.6;">Men 10 yoshdaman va Jizzaxdan turib butun dunyo uchun eng aqlli dasturlarni yozaman.</p>
-            <div style="margin-top:40px;"><a href="#history" class="btn">Daho bilan tanishing</a></div>
+            <h2 class="title" style="color: var(--text); font-size: clamp(30px, 5vw, 60px);">Kelajak texnologiyalarini quramiz.</h2>
+            <p style="max-width: 600px; line-height: 1.6; margin: 20px 0;">Men Full-stack dasturchiman. Daho Dev jamoasi asoschisi sifatida murakkab va sifatli web-ilovalarni yaratish bilan shug'ullanaman.</p>
+            <a href="#projects" class="btn">Loyihalarni ko'rish</a>
         </section>
 
-        <section id="photos" data-aos="fade-up">
-            <p class="num">01. Galereya</p>
-            <h2 class="title" style="font-size: 40px;">Mening Rasmlarim</h2>
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <img src="https://i.postimg.cc/Y03PT5Kx/Axmatov-Yusufxon.png" alt="Yusufxon Rasmi" class="my-photo">
-            </div>
-        </section>
-
-        <section id="history" data-aos="fade-right">
-            <p class="num">02. Men Haqimda</p>
-            <h2 class="title" style="font-size: 40px;">Daho Yo'li</h2>
-            <div class="grid">
-                <div class="card" data-aos="zoom-in">
-                    <h3>Erta Qadam</h3>
-                    <p>Dasturlash olamiga juda yosh kirganman va bu yo'lda to'xtamayman.</p>
-                </div>
-                <div class="card" data-aos="zoom-in" data-aos-delay="200">
-                    <h3>Jizzax Faxri</h3>
-                    <p>O'zbekiston IT sohasini dunyo darajasiga olib chiqish mening maqsadim.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="kabinet" data-aos="fade-up">
-            <p class="num">05. Aloqa</p>
-            <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
-            <div class="premium-box" data-aos="flip-up">
-                <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-crown"></i> Premium Gmail (VIP)</h3>
-                <p style="font-family:monospace; color:var(--gold); font-size: 18px;">techprogramm25@gmail.com</p>
-            </div>
-            <div style="margin-top:50px; background:var(--card); padding:40px; border-radius:15px;" data-aos="fade-up">
-                <h3 style="color:white; margin-bottom:25px;">Xabar yuborish</h3>
-                <input type="text" id="sender" placeholder="Ismingiz">
-                <textarea id="message" rows="4" placeholder="Xabaringizni yozing..."></textarea>
-                <button class="btn" style="width:100%" onclick="sendData()">XABARNI YUBORISH</button>
-            </div>
-        </section>
-
-        <footer style="text-align:center; padding:60px 0; border-top: 1px solid rgba(255,255,255,0.05);">
-            <p style="color:var(--accent); font-family:monospace; letter-spacing: 5px;">YUSUFXON AXMATOV © 2026</p>
-        </footer>
-    </div>
+        </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        let messages = [];
-        AOS.init({ duration: 1000, once: false, mirror: true });
-        window.onload = () => {
+        AOS.init({ duration: 1000, once: true });
+        
+        window.addEventListener('load', () => {
             setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 800);
-                document.getElementById('content').style.opacity = '1';
-            }, 5500);
-        };
-        function toggleAdmin() {
-            const p = document.getElementById('admin-panel');
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
-        }
-        function sendData() {
-            const s = document.getElementById('sender').value;
-            const m = document.getElementById('message').value;
-            if(s && m) {
-                messages.push({s, m, t: new Date().toLocaleTimeString()});
-                alert("Daho Yusufxon: Xabaringiz qabul qilindi!");
-                document.getElementById('sender').value = "";
-                document.getElementById('message').value = "";
-            }
-        }
-        function openVault() {
-            if(prompt("ROOT_KOD:") === "20152015") {
-                document.getElementById('logs').style.display = 'block';
-                const l = document.getElementById('msg-list');
-                l.innerHTML = messages.length ? messages.map(x => `<div style="border-bottom:1px solid #1e293b; padding:10px;">[${x.t}] <b>${x.s}:</b> ${x.m}</div>`).join('') : "Terminal bo'sh.";
-            } else { alert("ACCESS_DENIED"); }
-        }
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').style.opacity = '1';
+                }, 800);
+            }, 4500);
+        });
     </script>
 </body>
 </html>
