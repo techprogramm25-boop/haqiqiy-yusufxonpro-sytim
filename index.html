@@ -20,6 +20,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
+        /* --- MENU TUGMASI --- */
+        .top-menu { position: fixed; top: 30px; left: 40px; z-index: 2000; display: flex; gap: 20px; }
+        .menu-btn { background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent); color: var(--accent); padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; transition: 0.3s; }
+        .menu-btn:hover { background: var(--accent); color: var(--bg); }
+
         /* --- DAHO LOADER --- */
         #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 0.8s; }
         .loader-ring { width: 120px; height: 120px; border: 4px solid transparent; border-top: 4px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; position: absolute; }
@@ -53,6 +58,9 @@
         .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); }
         .card h3 { color: var(--white); margin-bottom: 15px; font-size: 22px; }
 
+        /* RASM STILI */
+        .my-photo { width: 100%; max-width: 400px; border-radius: 20px; border: 3px solid var(--accent); margin-top: 20px; box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); }
+
         .premium-box { border: 2px solid var(--gold); padding: 30px; border-radius: 15px; margin-top: 30px; position: relative; background: rgba(245, 158, 11, 0.05); }
         .premium-box::after { content: "PULLIK"; position: absolute; top: 15px; right: -35px; background: var(--gold); color: black; padding: 5px 45px; transform: rotate(45deg); font-weight: bold; font-size: 12px; }
         
@@ -65,6 +73,11 @@
     </style>
 </head>
 <body>
+
+    <div class="top-menu">
+        <a href="#hero" class="menu-btn">Bosh sahifa</a>
+        <a href="#photos" class="menu-btn"><i class="fas fa-image"></i> Rasmlarim</a>
+    </div>
 
     <div id="loader">
         <div class="loader-ring"></div>
@@ -106,12 +119,20 @@
             <p class="num">Assalomu alaykum, men —</p>
             <h1 class="title">Yusufxon Axmatov.</h1>
             <h2 class="title" style="color:var(--text); font-size: clamp(25px, 5vw, 45px);">Men daho dasturchiman.</h2>
-            <p style="max-width: 650px; font-size: 20px; line-height: 1.6;">Men 10 yoshdaman va Jizzaxdan turib butun dunyo uchun eng aqlli dasturlarni yozaman. Kod yozish — mening hayotim.</p>
+            <p style="max-width: 650px; font-size: 20px; line-height: 1.6;">Men 10 yoshdaman va Jizzaxdan turib butun dunyo uchun eng aqlli dasturlarni yozaman.</p>
             <div style="margin-top:40px;"><a href="#history" class="btn">Daho bilan tanishing</a></div>
         </section>
 
+        <section id="photos" data-aos="fade-up">
+            <p class="num">01. Galereya</p>
+            <h2 class="title" style="font-size: 40px;">Mening Rasmlarim</h2>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <img src="https://i.postimg.cc/Y03PT5Kx/Axmatov-Yusufxon.png" alt="Yusufxon Rasmi" class="my-photo">
+            </div>
+        </section>
+
         <section id="history" data-aos="fade-right">
-            <p class="num">01. Men Haqimda</p>
+            <p class="num">02. Men Haqimda</p>
             <h2 class="title" style="font-size: 40px;">Daho Yo'li</h2>
             <div class="grid">
                 <div class="card" data-aos="zoom-in">
@@ -125,35 +146,8 @@
             </div>
         </section>
 
-        <section data-aos="fade-left">
-            <p class="num">02. Texnologiyalar</p>
-            <h2 class="title" style="font-size: 40px;">Mening Bilimlarim</h2>
-            <div class="grid">
-                <div class="card"><h3>Python & AI</h3><p>Aqlli tizimlar va botlar yaratish.</p></div>
-                <div class="card"><h3>Web Dev</h3><p>Zamonaviy va professional saytlar qurish.</p></div>
-            </div>
-        </section>
-
-        <section id="reklama" data-aos="zoom-in">
-            <p class="num">03. Reklama</p>
-            <div class="card" style="border: 2px solid var(--blue); background: rgba(59, 130, 246, 0.05);">
-                <h3 style="color: var(--blue);"><i class="fas fa-star"></i> TeamIT.uz</h3>
-                <p style="margin: 20px 0;">Eng zo'r o'quv markazda daho bo'lib yetishing! Dasturlashni hoziroq o'rganing.</p>
-                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">BORING O'QING!</a>
-            </div>
-        </section>
-
-        <section id="my-sites" data-aos="fade-up">
-            <p class="num">04. Portfoliolarim</p>
-            <h2 class="title" style="font-size: 40px;">Mening Saytlarim</h2>
-            <div class="card" style="text-align: center; border: 2px dashed var(--accent);">
-                <h3 style="margin-bottom: 25px;">Loyihalarim To'plami</h3>
-                <a href="https://yusufxonpro-loading.vercel.app/" class="btn" style="background: var(--accent); color: var(--bg); border: none;">SAYTIMGA KIRISH</a>
-            </div>
-        </section>
-
         <section id="kabinet" data-aos="fade-up">
-            <p class="num">05. Shaxsiy Kabinet</p>
+            <p class="num">05. Aloqa</p>
             <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
             <div class="premium-box" data-aos="flip-up">
                 <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-crown"></i> Premium Gmail (VIP)</h3>
