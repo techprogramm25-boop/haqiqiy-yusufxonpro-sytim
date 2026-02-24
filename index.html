@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         :root { 
-            --bg: #030712; 
+            --bg: #020617; 
             --accent: #10b981; 
             --text: #9ca3af; 
             --white: #f9fafb; 
-            --card: rgba(17, 24, 39, 0.8); 
+            --card: rgba(15, 23, 42, 0.8); 
             --red: #ef4444; 
             --gold: #f59e0b;
             --blue: #3b82f6;
+            --glow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
@@ -45,172 +46,127 @@
         section { min-height: 100vh; padding: 100px 0; display: flex; flex-direction: column; justify-content: center; position: relative; }
         .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 10px; }
         .title { color: var(--white); font-size: clamp(35px, 7vw, 75px); font-weight: 900; line-height: 1.1; margin-bottom: 25px; }
-        .btn { padding: 16px 35px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.4s; border-radius: 4px; }
-        .btn:hover { background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+        
+        /* Typing Effect */
+        .typing { color: var(--accent); border-right: 3px solid var(--accent); animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .btn { padding: 16px 35px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.4s; border-radius: 4px; box-shadow: var(--glow); }
+        .btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 30px var(--accent); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--card); padding: 35px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); transition: 0.4s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7); }
+        .card { background: var(--card); padding: 35px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px); transition: 0.4s; overflow: hidden; }
+        .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 0 25px rgba(16, 185, 129, 0.2); }
         .card h3 { color: var(--white); margin-bottom: 15px; font-size: 22px; }
 
-        .premium-box { border: 2px solid var(--gold); padding: 30px; border-radius: 15px; margin-top: 30px; position: relative; background: rgba(245, 158, 11, 0.05); }
-        .premium-box::after { content: "PULLIK"; position: absolute; top: 15px; right: -35px; background: var(--gold); color: black; padding: 5px 45px; transform: rotate(45deg); font-weight: bold; font-size: 12px; }
-        
-        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #0f172a; border: 1px solid #1e293b; color: white; border-radius: 8px; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--accent); }
+        .img-box { position: relative; overflow: hidden; border-radius: 12px; }
+        .img-box img { width: 100%; transition: 0.5s; display: block; }
+        .img-box:hover img { transform: scale(1.1); }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--accent); color: var(--bg); padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; }
 
-        .term-icon { position: fixed; top: 30px; right: 40px; color: var(--accent); font-size: 32px; cursor: pointer; z-index: 2000; transition: 0.3s; }
-        .term-icon:hover { transform: rotate(90deg); color: var(--white); }
-        #admin-panel { display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.99); z-index: 5000; padding: 10%; border-left: 5px solid var(--accent); }
+        .premium-box { border: 2px solid var(--gold); padding: 30px; border-radius: 15px; margin-top: 30px; position: relative; background: rgba(245, 158, 11, 0.05); text-align: center; }
+        
+        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #0f172a; border: 1px solid #1e293b; color: white; border-radius: 8px; outline: none; }
+        input:focus { border-color: var(--accent); box-shadow: var(--glow); }
+
+        .term-icon { position: fixed; top: 30px; right: 40px; color: var(--accent); font-size: 32px; cursor: pointer; z-index: 2000; }
     </style>
 </head>
 <body>
 
     <div id="loader">
         <div class="loader-ring"></div>
-        <span class="char b">B</span>
-        <span class="char x">✕</span>
-        <span class="char y">Y</span>
-        <div class="f-name">YUSUFXON AXMATOV</div>
+        <span class="char b">B</span><span class="char x">✕</span><span class="char y">Y</span>
+        <div class="f-name">DAHO YUSUFXON</div>
     </div>
 
     <div class="term-icon" onclick="toggleAdmin()"><i class="fas fa-terminal"></i></div>
 
-    <div id="admin-panel">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 style="color:white; font-family:monospace;">> Daho Terminal v2.0</h2>
-            <i class="fas fa-times" style="color:var(--accent); cursor:pointer; font-size: 30px;" onclick="toggleAdmin()"></i>
-        </div>
-        <button class="btn" onclick="openVault()" style="margin-top:20px">TERMINALGA_KIRISH</button>
-        <div id="logs" style="margin-top:40px; display:none; color:var(--accent); font-family:monospace;">
-            <p>> Ma'lumotlar bazasi ulanmoqda...</p>
-            <div id="msg-list" style="color:white; margin-top:20px"></div>
-        </div>
-    </div>
-
     <div class="side side-l">
         <div class="social">
             <a href="https://github.com/techprogramm25-boop" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/yusufxonpro/" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         <div class="v-line"></div>
     </div>
-    <div class="side side-r">
-        <p style="writing-mode: vertical-rl; margin-bottom: 25px; color: var(--accent); font-family: monospace; letter-spacing: 2px;">techprogramm25@gmail.com</p>
-        <div class="v-line"></div>
-    </div>
 
     <div id="content">
-        <section id="hero" data-aos="fade-up">
-            <p class="num">Assalomu alaykum, men —</p>
-            <h1 class="title">Yusufxon Axmatov.</h1>
-            <h2 class="title" style="color:var(--text); font-size: clamp(25px, 5vw, 45px);">Men daho dasturchiman.</h2>
-            <p style="max-width: 650px; font-size: 20px; line-height: 1.6;">Men 10 yoshdaman va Jizzaxdan turib butun dunyo uchun eng aqlli dasturlarni yozaman. Kod yozish — mening hayotim.</p>
-            <div style="margin-top:40px;"><a href="#history" class="btn">Daho bilan tanishing</a></div>
+        <section id="hero" data-aos="zoom-in">
+            <p class="num">SALOM DO'STIM!</p>
+            <h1 class="title">Men Yusufxonman.</h1>
+            <h2 class="title" style="color:var(--text); font-size: clamp(20px, 4vw, 35px);">
+                Men <span class="typing" id="type-text"></span>
+            </h2>
+            <p style="max-width: 650px; font-size: 18px; line-height: 1.6;">Men 10 yoshdaman. Kelajakda dunyoni kodlar bilan o'zgartirmoqchiman. Sen ham men bilan birga o'rganishni xohlaysanmi?</p>
+            <div style="margin-top:40px;"><a href="#gallery" class="btn">DAHO ISHLARINI KO'RISH</a></div>
         </section>
 
-        <section id="history" data-aos="fade-right">
-            <p class="num">01. Men Haqimda</p>
-            <h2 class="title" style="font-size: 40px;">Daho Yo'li</h2>
+        <section id="gallery" data-aos="fade-up">
+            <p class="num">01. MENING LOYIHAM</p>
+            <h2 class="title" style="font-size: 40px;">Maxsus Baner</h2>
             <div class="grid">
-                <div class="card" data-aos="zoom-in">
-                    <h3>Erta Qadam</h3>
-                    <p>Dasturlash olamiga juda yosh kirganman va bu yo'lda to'xtamayman.</p>
+                <div class="card">
+                    <div class="img-box">
+                        <span class="badge">DAHO ART</span>
+                        <img src="Axmatov Yusufxon (1).jpg" alt="V typing banner">
+                    </div>
+                    <div style="margin-top:20px;">
+                        <h3 style="color:var(--accent);">V Typing Pro</h3>
+                        <p>Tez yozishni o'rganadigan daxshat tizim!</p>
+                    </div>
                 </div>
-                <div class="card" data-aos="zoom-in" data-aos-delay="200">
-                    <h3>Jizzax Faxri</h3>
-                    <p>O'zbekiston IT sohasini dunyo darajasiga olib chiqish mening maqsadim.</p>
-                </div>
             </div>
         </section>
 
-        <section data-aos="fade-left">
-            <p class="num">02. Texnologiyalar</p>
-            <h2 class="title" style="font-size: 40px;">Mening Bilimlarim</h2>
-            <div class="grid">
-                <div class="card"><h3>Python & AI</h3><p>Aqlli tizimlar va botlar yaratish.</p></div>
-                <div class="card"><h3>Web Dev</h3><p>Zamonaviy va professional saytlar qurish.</p></div>
-            </div>
-        </section>
-
-        <section id="reklama" data-aos="zoom-in">
-            <p class="num">03. Reklama</p>
-            <div class="card" style="border: 2px solid var(--blue); background: rgba(59, 130, 246, 0.05);">
-                <h3 style="color: var(--blue);"><i class="fas fa-star"></i> TeamIT.uz</h3>
-                <p style="margin: 20px 0;">Eng zo'r o'quv markazda daho bo'lib yetishing! Dasturlashni hoziroq o'rganing.</p>
-                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">BORING O'QING!</a>
-            </div>
-        </section>
-
-        <section id="my-banners" data-aos="fade-up">
-            <p class="num">04. Mening Banerim</p>
-            <div class="card" style="padding: 10px;">
-                <img src="Axmatov Yusufxon (1).jpg" alt="Daho Yusufxon" style="width: 100%; border-radius: 10px; display: block;">
-            </div>
-        </section>
-
-        <section id="my-sites" data-aos="fade-up">
-            <p class="num">05. Portfoliolarim</p>
-            <h2 class="title" style="font-size: 40px;">Mening Saytlarim</h2>
-            <div class="card" style="text-align: center; border: 2px dashed var(--accent);">
-                <h3 style="margin-bottom: 25px;">Loyihalarim To'plami</h3>
-                <a href="https://yusufxonpro-loading.vercel.app/" class="btn" style="background: var(--accent); color: var(--bg); border: none;">SAYTIMGA KIRISH</a>
+        <section id="reklama" data-aos="flip-left">
+            <p class="num">02. TAVSIYA</p>
+            <div class="card" style="border: 2px solid var(--blue); background: rgba(59, 130, 246, 0.1);">
+                <h3 style="color: var(--blue);"><i class="fas fa-rocket"></i> Sen ham o'qi!</h3>
+                <p style="margin: 20px 0;">Men TeamIT.uz markazida o'qiyman. Agar sen ham daho bo'lishni xohlasang, bizga qo'shil!</p>
+                <a href="https://teamit.uz" target="_blank" class="btn" style="border-color: var(--blue); color: var(--blue);">DAHO BO'LISH</a>
             </div>
         </section>
 
         <section id="kabinet" data-aos="fade-up">
-            <p class="num">06. Shaxsiy Kabinet</p>
-            <h2 class="title" style="font-size: 40px;">Daho bilan aloqa</h2>
-            <div class="premium-box" data-aos="flip-up">
-                <h3 style="color:var(--gold); margin-bottom:15px;"><i class="fas fa-crown"></i> Premium Gmail (VIP)</h3>
-                <p style="font-family:monospace; color:var(--gold); font-size: 18px;">techprogramm25@gmail.com</p>
-            </div>
-            <div style="margin-top:50px; background:var(--card); padding:40px; border-radius:15px;" data-aos="fade-up">
-                <h3 style="color:white; margin-bottom:25px;">Xabar yuborish</h3>
-                <input type="text" id="sender" placeholder="Ismingiz">
-                <textarea id="message" rows="4" placeholder="Xabaringizni yozing..."></textarea>
-                <button class="btn" style="width:100%" onclick="sendData()">XABARNI YUBORISH</button>
+            <p class="num">03. SAVOLING BORMI?</p>
+            <h2 class="title" style="font-size: 40px;">Menga xat yoz</h2>
+            <div style="background:var(--card); padding:40px; border-radius:15px; border: 1px solid var(--accent);">
+                <input type="text" id="sender" placeholder="Ismingni ayt...">
+                <textarea id="message" rows="4" placeholder="Menga nima demoqchisan?"></textarea>
+                <button class="btn" style="width:100%" onclick="sendData()">YUBORISH (DAHO QABUL QILADI)</button>
             </div>
         </section>
 
-        <footer style="text-align:center; padding:60px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+        <footer style="text-align:center; padding:60px 0;">
             <p style="color:var(--accent); font-family:monospace; letter-spacing: 5px;">YUSUFXON AXMATOV © 2026</p>
         </footer>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        let messages = [];
-        AOS.init({ duration: 1000, once: false, mirror: true });
-        window.onload = () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 800);
-                document.getElementById('content').style.opacity = '1';
-            }, 5500);
-        };
-        function toggleAdmin() {
-            const p = document.getElementById('admin-panel');
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
-        }
-        function sendData() {
-            const s = document.getElementById('sender').value;
-            const m = document.getElementById('message').value;
-            if(s && m) {
-                messages.push({s, m, t: new Date().toLocaleTimeString()});
-                alert("Daho Yusufxon: Xabaringiz qabul qilindi!");
-                document.getElementById('sender').value = "";
-                document.getElementById('message').value = "";
+        AOS.init({ duration: 1000 });
+
+        // Typing effect
+        const text = "DAHO DASTURCHIMAN...";
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                document.getElementById("type-text").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 150);
             }
         }
-        function openVault() {
-            if(prompt("ROOT_KOD:") === "20152015") {
-                document.getElementById('logs').style.display = 'block';
-                const l = document.getElementById('msg-list');
-                l.innerHTML = messages.length ? messages.map(x => `<div style="border-bottom:1px solid #1e293b; padding:10px;">[${x.t}] <b>${x.s}:</b> ${x.m}</div>`).join('') : "Terminal bo'sh.";
-            } else { alert("ACCESS_DENIED"); }
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.opacity = '1';
+                type();
+            }, 4500);
+        };
+
+        function sendData() {
+            alert("Xabaring daho Yusufxonga yuborildi! Tez orada javob beradi.");
         }
     </script>
 </body>
