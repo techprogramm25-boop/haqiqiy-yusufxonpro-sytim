@@ -3,79 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YusufxonPro.uz | Daho Dev</title>
-<meta name="description" content="Yusufxon Axmatov (YusufxonPro) - 11 yoshli daho dasturchi. Jizzaxdan turib professional web-saytlar va AI tizimlar yaratadi.">
-
+<title>YusufxonPro | Daho Portal</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 <style>
 :root {
---bg: #010409;
---accent: #00ff88;
---text: #8b949e;
---white: #f0f6fc;
---card: rgba(22, 27, 34, 0.8);
---red: #ff4d4d;
---gold: #ffb700;
---blue: #58a6ff;
---glow: 0 0 20px rgba(0, 255, 136, 0.3);
+--bg: #010409; --accent: #00ff88; --text: #8b949e; --white: #f0f6fc;
+--card: rgba(22, 27, 34, 0.8); --red: #ff4d4d; --gold: #ffb700; --blue: #58a6ff;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
 body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-/* --- DAHO ULTRA LOADER (O'zgarishsiz) --- */
-#loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
-.loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
-.char { position: absolute; font-size: 70px; font-weight: 900; opacity: 0; filter: blur(5px); }
+/* --- DAHO ULTRA LOADER --- */
+#loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s ease-in-out; }
+.loader-ring { width: 150px; height: 150px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
+.char { position: absolute; font-size: 70px; font-weight: 900; opacity: 0; }
 .b { color: var(--accent); animation: fI 0.5s 1s forwards, fO 0.5s 2s forwards; }
 .x { color: var(--red); animation: fI 0.4s 2.2s forwards, fO 0.3s 3s forwards; }
-.y { color: var(--accent); animation: fI 0.5s 3.2s forwards; text-shadow: 0 0 30px var(--accent); }
-.f-name { margin-top: 180px; color: var(--white); letter-spacing: 15px; opacity: 0; animation: fI 1s 4s forwards; font-size: 14px; font-family: monospace; }
+.y { color: var(--accent); animation: fI 0.5s 3.2s forwards; }
+.f-name { margin-top: 200px; color: var(--white); letter-spacing: 5px; opacity: 0; animation: fI 1s 4s forwards; font-size: 22px; font-weight: bold; }
+
 @keyframes spin { 100% { transform: rotate(360deg); } }
-@keyframes fI { to { opacity: 1; filter: blur(0); } }
-@keyframes fO { to { opacity: 0; transform: scale(1.5); filter: blur(10px); } }
+@keyframes fI { to { opacity: 1; transform: scale(1.1); } }
+@keyframes fO { to { opacity: 0; transform: scale(0.5); } }
 
-/* --- NEW: STUDIO SECTIONS DESIGN --- */
-.studio-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 20px;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 15px;
-    overflow: hidden;
-    height: 450px;
-    margin-top: 30px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+/* --- SOCIAL FLY SYSTEM --- */
+.social-container { position: fixed; bottom: 40px; left: 40px; z-index: 999; }
+.soc-btn { font-size: 25px; color: var(--text); margin-bottom: 20px; cursor: pointer; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: block; }
+.fly-active { transform: translate(50vw, -50vh) scale(0) rotate(720deg) !important; opacity: 0; }
+
+#big-github { 
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); 
+    z-index: 1000; background: var(--card); padding: 50px; border-radius: 30px; 
+    border: 2px solid var(--accent); transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-align: center; backdrop-filter: blur(20px);
 }
-.editor-side, .preview-side { display: flex; flex-direction: column; height: 100%; }
-.studio-header { background: #161b22; padding: 12px 20px; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; font-family: monospace; font-size: 14px; }
-.code-area { padding: 25px; flex-grow: 1; overflow: auto; font-family: 'Fira Code', monospace; line-height: 1.6; font-size: 15px; background: #010409; }
-.preview-area { padding: 25px; flex-grow: 1; background: #0d1117; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+#big-github.show { transform: translate(-50%, -50%) scale(1); }
+#big-github i { font-size: 100px; color: var(--white); cursor: pointer; }
+.close-gh { position: absolute; top: 10px; right: 20px; font-size: 30px; color: var(--red); cursor: pointer; }
 
-/* Syntax Highlighting */
-.keyword { color: #ff7b72; } .function { color: #d2a8ff; } .string { color: #a5d6ff; } .tag { color: #7ee787; } .attr { color: #79c0ff; }
-.cursor-blink { border-left: 2px solid var(--accent); animation: blink 0.7s infinite; margin-left: 2px; }
-@keyframes blink { 50% { opacity: 0; } }
+/* --- STUDIO STYLES --- */
+.studio-box { background: #0d1117; border: 1px solid #333; border-radius: 12px; height: 350px; overflow: hidden; display: flex; flex-direction: column; }
+.st-header { background: #161b22; padding: 10px; font-family: monospace; font-size: 13px; display: flex; justify-content: space-between; }
+.st-body { padding: 15px; flex: 1; font-family: 'Fira Code', monospace; font-size: 14px; overflow-y: auto; }
 
-/* --- EXISTING DESIGN ELEMENTS --- */
-.glow-sphere { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 255, 136, 0.05) 0%, transparent 70%); z-index: -1; pointer-events: none; }
-.side { position: fixed; bottom: 0; display: flex; flex-direction: column; align-items: center; z-index: 500; }
-.side-l { left: 40px; } .side-r { right: 40px; }
-.social a { color: var(--text); font-size: 24px; margin-bottom: 30px; transition: 0.4s ease; text-decoration: none; display: block; }
-.social a:hover { color: var(--accent); transform: translateY(-8px); filter: drop-shadow(var(--glow)); }
-.v-line { width: 1px; height: 150px; background: linear-gradient(transparent, var(--accent)); }
-section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 0 15%; position: relative; }
-#content { opacity: 0; transition: 2s ease; }
-.num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
-.title { color: var(--white); font-size: clamp(45px, 8vw, 90px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; letter-spacing: -3px; }
-.btn { padding: 20px 45px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; display: inline-block; font-weight: 900; transition: 0.5s; border-radius: 4px; text-transform: uppercase; letter-spacing: 2px; }
-.btn:hover { background: rgba(0, 255, 136, 0.1); box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); transform: scale(1.05); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
-.card { background: var(--card); padding: 45px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); backdrop-filter: blur(20px); transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
-.term-icon { position: fixed; top: 40px; right: 50px; color: var(--accent); font-size: 35px; cursor: pointer; z-index: 2000; transition: 0.5s; filter: drop-shadow(var(--glow)); }
-#admin-panel { display: none; position: fixed; inset: 0; background: rgba(1, 4, 9, 0.98); z-index: 5000; padding: 10%; border-left: 8px solid var(--accent); backdrop-filter: blur(15px); }
+/* --- SECTIONS --- */
+section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 0 12%; position: relative; }
+.title { color: var(--white); font-size: clamp(40px, 8vw, 80px); font-weight: 900; line-height: 1; margin-bottom: 20px; }
+.daho-desc { font-size: 1.2rem; line-height: 1.8; max-width: 800px; color: var(--text); }
+
+/* --- RATING TIZIMI --- */
+#rating-area { text-align: center; background: rgba(0,255,136,0.02); }
+.star-box { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+.star-box i { font-size: 35px; color: #333; cursor: pointer; transition: 0.3s; }
+.star-box i.active { color: var(--gold); transform: scale(1.2); text-shadow: 0 0 15px var(--gold); }
+
+/* --- FEEDBACK --- */
+.feed-item { background: #161b22; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--accent); }
+.like-count { cursor: pointer; color: var(--red); font-weight: bold; }
 </style>
 </head>
 <body>
@@ -85,178 +71,179 @@ section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; 
     <span class="char b">B</span>
     <span class="char x">✕</span>
     <span class="char y">Y</span>
-    <div class="f-name">YUSUFXON AXMATOV • DAHO SYSTEM</div>
+    <div class="f-name">YUSUFXON AXMATOV</div>
 </div>
 
-<div class="term-icon" onclick="toggleAdmin()"><i class="fas fa-terminal"></i></div>
-
-<div id="admin-panel">
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #30363d; padding-bottom: 20px;">
-        <h2 style="color:var(--accent); font-family:monospace; font-size: 30px;">> DAHO_CORE_TERMINAL</h2>
-        <i class="fas fa-times" style="color:var(--red); cursor:pointer; font-size: 40px;" onclick="toggleAdmin()"></i>
-    </div>
-    <div style="margin-top:50px;">
-        <button class="btn" onclick="openVault()">TERMINALNI_OCHISH</button>
-    </div>
-    <div id="logs" style="margin-top:40px; display:none; color:var(--accent); font-family:monospace; background: #000; padding: 30px; border-radius: 15px; border: 1px solid #30363d;">
-        <div id="msg-list" style="color:white; margin-top:20px; font-size: 18px;"></div>
-    </div>
+<div class="social-container" id="soc-group">
+    <i class="fab fa-github soc-btn" onclick="flyToGithub()"></i>
+    <i class="fab fa-instagram soc-btn" onclick="flyToGithub()"></i>
+    <i class="fab fa-telegram soc-btn" onclick="flyToGithub()"></i>
 </div>
 
-<div class="side side-l">
-    <div class="social">
-        <a href="https://github.com/techprogramm25-boop" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/yusufxonpro/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank"><i class="fab fa-telegram"></i></a>
-    </div>
-    <div class="v-line"></div>
+<div id="big-github">
+    <i class="fas fa-times close-gh" onclick="returnIcons()"></i>
+    <a href="https://github.com/techprogramm25-boop" target="_blank">
+        <i class="fab fa-github"></i>
+    </a>
+    <h2 style="color:var(--white); margin-top:20px;">GITHUB_PRO_DAHO</h2>
+    <p style="color:var(--accent)">Loyihalarni ko'rish uchun bosing</p>
 </div>
 
-<div id="content">
+<div id="content" style="opacity:0">
     <section id="hero">
-        <span class="num" data-aos="fade-down">00. Xush kelibsiz</span>
-        <h1 class="title" data-aos="fade-right">Yusufxon<br><span style="color:var(--accent)">Axmatov.</span></h1>
-        <p style="max-width: 750px; font-size: 24px; line-height: 1.5; margin-bottom: 40px;">Men 11 yoshdaman. <b style="color:var(--white)">Jizzax</b> zaminidan turib, kelajak algoritmlarini yarataman.</p>
-        <div data-aos="zoom-in"><a href="#python-studio" class="btn">Studioni ko'rish</a></div>
+        <span style="color:var(--accent); font-family:monospace;">[ SYSTEM_INITIALIZED_2026 ]</span>
+        <h1 class="title">Yusufxon Axmatov.<br><span style="color:var(--accent)">Daho Arxivlari.</span></h1>
+        <div class="daho-desc" data-aos="fade-up">
+            Men 11 yoshli dasturchi, Jizzaxning raqamli kelajagi va algoritmlar ustasiman.<br>
+            Mening kodlarim shunchaki buyruqlar emas, ular raqamli olamning yangi qonuniyatlaridir.<br>
+            Har bir qatorda dahoona yondashuv va professional intizom mujassam.<br>
+            Men faqat sayt yaratmayman, men foydalanuvchi ongini o'zgartiruvchi tajribalar quraman.<br>
+            Mening maqsadim — O'zbekiston IT-quvvatini dunyoning eng yuqori nuqtasiga olib chiqish.<br>
+            Kelajak allaqachon shu yerda, va u mening klaviaturamda yozilmoqda.<br>
+            Xush kelibsiz, raqamli evolyutsiyaning markaziga!
+        </div>
     </section>
 
-    <section id="python-studio">
-        <span class="num">01. Backend Art</span>
-        <h2 class="title" style="font-size: 50px;">Python <span style="color:var(--blue)">Daho</span> Studio</h2>
-        <div class="studio-container" data-aos="flip-up">
-            <div class="editor-side">
-                <div class="studio-header"><span><i class="fab fa-python" style="color:var(--blue)"></i> main.py</span><span>UTF-8</span></div>
-                <div class="code-area" id="py-editor"></div>
+    <section>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+            <div class="studio-box">
+                <div class="st-header"><span><i class="fab fa-python"></i> daho_core.py</span></div>
+                <div class="st-body" id="py-area"></div>
             </div>
-            <div class="preview-side">
-                <div class="studio-header"><span><i class="fas fa-terminal"></i> Output</span></div>
-                <div class="preview-area" id="py-preview" style="color:var(--accent); font-family:monospace; flex-direction:column; align-items:flex-start;"></div>
+            <div class="studio-box">
+                <div class="st-header"><span><i class="fab fa-html5"></i> index.html</span></div>
+                <div class="st-body" id="html-area"></div>
             </div>
         </div>
     </section>
 
-    <section id="html-studio">
-        <span class="num">02. Frontend Art</span>
-        <h2 class="title" style="font-size: 50px;">HTML <span style="color:var(--accent)">Daho</span> Studio</h2>
-        <div class="studio-container" data-aos="flip-up">
-            <div class="editor-side">
-                <div class="studio-header"><span><i class="fab fa-html5" style="color:#e34c26"></i> index.html</span></div>
-                <div class="code-area" id="html-editor"></div>
+    <section id="rating-area">
+        <h2 class="title" style="font-size:45px;">Daho Portfolioga Baho Berish</h2>
+        <p>Sizningcha ushbu ishlanma 12 balldan necha ballga loyiq?</p>
+        <div class="star-box" id="star-box">
             </div>
-            <div class="preview-side">
-                <div class="studio-header"><span><i class="fas fa-globe"></i> Live Preview</span></div>
-                <div class="preview-area" id="html-preview" style="background:#fff; color:#000; border-radius:0 0 15px 0;"></div>
-            </div>
-        </div>
+        <h3 id="rating-text" style="color:var(--accent)">Ball kutilmoqda...</h3>
     </section>
 
-    <section id="history">
-        <span class="num">03. Missiya</span>
-        <h2 class="title" style="font-size: 50px;">Daho Yo'li</h2>
-        <div class="grid">
-            <div class="card" data-aos="fade-up"><h3>Erta Qadam</h3><p>Dasturlash men uchun ona tili kabi.</p></div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200"><h3>Global Maqsad</h3><p>O'zbekiston IT-quvvatini dunyoga ko'rsatish.</p></div>
+    <section id="contact">
+        <h2 class="title" style="font-size:45px;">Daho bilan aloqa</h2>
+        <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap:40px;">
+            <div class="card">
+                <input type="text" id="user-name" placeholder="Ismingiz" style="width:100%; padding:15px; margin-bottom:15px; background:#0d1117; border:1px solid #333; color:white;">
+                <textarea id="user-msg" rows="5" placeholder="Xabaringiz..." style="width:100%; padding:15px; background:#0d1117; border:1px solid #333; color:white;"></textarea>
+                <button onclick="saveMsg()" style="width:100%; padding:15px; margin-top:15px; background:var(--accent); border:none; color:black; font-weight:bold; cursor:pointer;">XABARNI YUBORISH</button>
+            </div>
+            <div id="feed-container" style="overflow-y:auto; height:400px; padding-right:10px;"></div>
         </div>
     </section>
-
-    <footer style="text-align:center; padding: 100px 0;">
-        <p style="color:var(--accent); font-family:monospace; letter-spacing: 10px;">YUSUFXON AXMATOV • 2026</p>
-    </footer>
 </div>
 
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
-// DAHO LOADER SCRIPT (O'zgarishsiz)
+// LOADER & INITIALIZATION
 window.onload = () => {
-    AOS.init({ duration: 1200 });
+    AOS.init();
+    createStars();
+    renderMsgs();
     setTimeout(() => {
-        const loader = document.getElementById('loader');
-        loader.style.opacity = '0';
-        loader.style.transform = 'translateY(-100%)';
+        document.getElementById('loader').style.opacity = '0';
         setTimeout(() => {
-            loader.style.display = 'none';
+            document.getElementById('loader').style.display = 'none';
             document.getElementById('content').style.opacity = '1';
-            runStudios();
+            startCoding();
         }, 1000);
-    }, 5500);
+    }, 5000);
 };
 
-// STUDIO ANIMATION LOGIC
-const pythonCode = `<span class="keyword">class</span> <span class="function">DahoDev</span>:
-    <span class="keyword">def</span> <span class="function">__init__</span>(self):
-        self.name = <span class="string">"Yusufxon"</span>
-        self.age = <span class="string">11</span>
-
-<span class="function">print</span>(<span class="string">"Daho System Active!"</span>)`;
-
-const htmlCode = `<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"daho-card"</span><span class="tag">&gt;</span>
-  <span class="tag">&lt;h1&gt;</span>Kelajakni kodlayman<span class="tag">&lt;/h1&gt;</span>
-  <span class="tag">&lt;button&gt;</span>Daho Portali<span class="tag">&lt;/button&gt;</span>
-<span class="tag">&lt;/div&gt;</span>`;
-
-async function typeEffect(elementId, htmlContent, previewId, isHtml = false) {
-    const el = document.getElementById(elementId);
-    const pre = document.getElementById(previewId);
-    el.innerHTML = "";
-    
-    // Simulating typing
-    let div = document.createElement('div');
-    div.innerHTML = htmlContent;
-    let nodes = Array.from(div.childNodes);
-    
-    for(let node of nodes) {
-        if(node.nodeType === 3) { // Text
-            for(let char of node.textContent) {
-                el.innerHTML += char;
-                await new Promise(r => setTimeout(r, 40));
-            }
-        } else { // Element (span)
-            let span = node.cloneNode(false);
-            el.appendChild(span);
-            for(let char of node.textContent) {
-                span.textContent += char;
-                await new Promise(r => setTimeout(r, 40));
-            }
-        }
-    }
-    el.innerHTML += '<span class="cursor-blink"></span>';
-    
-    // Show Preview after typing
+// SOCIAL FLY LOGIC
+function flyToGithub() {
+    const icons = document.querySelectorAll('.soc-btn');
+    icons.forEach(i => i.classList.add('fly-active'));
     setTimeout(() => {
-        if(isHtml) {
-            pre.innerHTML = `<div style="text-align:center;">
-                <h2 style="margin-bottom:10px; color:#333;">Kelajakni kodlayman</h2>
-                <button style="padding:10px 20px; background:#00ff88; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">Daho Portali</button>
-            </div>`;
-        } else {
-            pre.innerHTML = `> python main.py<br>> <span style="color:#fff">Daho System Active!</span><br>> Process finished with exit code 0`;
-        }
-    }, 500);
+        document.getElementById('big-github').classList.add('show');
+    }, 600);
 }
 
-async function runStudios() {
-    while(true) {
-        await typeEffect('py-editor', pythonCode, 'py-preview', false);
-        await new Promise(r => setTimeout(r, 4000));
-        await typeEffect('html-editor', htmlCode, 'html-preview', true);
-        await new Promise(r => setTimeout(r, 8000)); // Studio restart cycle
+function returnIcons() {
+    document.getElementById('big-github').classList.remove('show');
+    const icons = document.querySelectorAll('.soc-btn');
+    setTimeout(() => {
+        icons.forEach(i => i.classList.remove('fly-active'));
+    }, 400);
+}
+
+// PARALLEL CODING (Parallel ishlaydi)
+async function typeCode(text, el, speed) {
+    let i = 0;
+    while(i < text.length) {
+        el.innerHTML += text.charAt(i);
+        i++;
+        await new Promise(r => setTimeout(r, speed));
     }
 }
 
-// Admin panel functions
-function toggleAdmin() {
-    const p = document.getElementById('admin-panel');
-    p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+function startCoding() {
+    const pyCode = "class Daho:\n  def __init__(self):\n    self.status = 'God Mode'\n    print('System Active')\n\n# YusufxonPro Arxiv";
+    const htmlCode = "<div class='daho'>\n  <h1>Future is here</h1>\n  <button>Join Us</button>\n</div>\n";
+    
+    // Ikkalasi har xil vaqtda va tezlikda boshlanadi
+    typeCode(pyCode, document.getElementById('py-area'), 60);
+    setTimeout(() => {
+        typeCode(htmlCode, document.getElementById('html-area'), 45);
+    }, 1500);
 }
 
-function openVault() {
-    const pass = prompt("DAHO_CORE_KEY:");
-    if(pass === "20152015") {
-        document.getElementById('logs').style.display = 'block';
-        document.getElementById('msg-list').innerHTML = "Daho Yusufxon tizimiga xush kelibsiz. Barcha tizimlar barqaror.";
-    } else {
-        alert("XATO!");
+// 12 STAR RATING
+function createStars() {
+    const box = document.getElementById('star-box');
+    for(let i=1; i<=12; i++) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star';
+        star.onclick = () => setRating(i);
+        box.appendChild(star);
     }
+}
+
+function setRating(n) {
+    const stars = document.querySelectorAll('#star-box i');
+    stars.forEach((s, idx) => {
+        s.classList.toggle('active', idx < n);
+    });
+    document.getElementById('rating-text').innerText = `Rahmat! Siz ${n} ball berdingiz.`;
+}
+
+// MESSAGE SYSTEM (Like qo'shildi)
+let msgs = JSON.parse(localStorage.getItem('daho_feed')) || [];
+
+function saveMsg() {
+    const name = document.getElementById('user-name').value;
+    const msg = document.getElementById('user-msg').value;
+    if(name && msg) {
+        msgs.unshift({name, msg, likes: 0});
+        localStorage.setItem('daho_feed', JSON.stringify(msgs));
+        renderMsgs();
+        document.getElementById('user-name').value = "";
+        document.getElementById('user-msg').value = "";
+    }
+}
+
+function renderMsgs() {
+    const container = document.getElementById('feed-container');
+    container.innerHTML = msgs.map((m, i) => `
+        <div class="feed-item">
+            <b>${m.name}</b>
+            <p>${m.msg}</p>
+            <div style="margin-top:10px;">
+                <span class="like-count" onclick="likeMsg(${i})">❤️ ${m.likes}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function likeMsg(i) {
+    msgs[i].likes++;
+    localStorage.setItem('daho_feed', JSON.stringify(msgs));
+    renderMsgs();
 }
 </script>
 </body>
