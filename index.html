@@ -150,7 +150,39 @@
         .rating-stars i { font-size: 30px; color: #30363d; transition: 0.3s; }
         .rating-stars i.active { color: var(--gold); text-shadow: 0 0 15px var(--gold); }
 
+        /* --- PYTHON DAHO STUDIO CSS --- */
+        .python-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle at bottom right, rgba(88, 166, 255, 0.05), transparent); }
+        .editor-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; margin-top: 30px; }
+        
+        .vscode-mockup { 
+            background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); font-family: 'Fira Code', monospace;
+        }
+        .vscode-header { background: #161b22; padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid #30363d; }
+        .v-dot { width: 12px; height: 12px; border-radius: 50%; }
+        
+        .vscode-body { padding: 25px; color: #e6edf3; font-size: 16px; line-height: 1.6; min-height: 250px; }
+        .py-keyword { color: #ff7b72; }
+        .py-func { color: #d2a8ff; }
+        .py-str { color: #a5d6ff; }
+        .py-cursor { border-left: 8px solid var(--accent); animation: pyblink 0.8s infinite; margin-left: 5px; }
+
+        .python-logo-mockup { 
+            position: relative; display: flex; justify-content: center; align-items: center; 
+            perspective: 1000px; padding: 20px;
+        }
+        .py-img { 
+            width: 100%; max-width: 250px; filter: drop-shadow(0 0 20px rgba(88, 166, 255, 0.3));
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+        }
+        .python-logo-mockup:hover .py-img { 
+            transform: rotateY(180deg) rotateX(10deg) scale(1.1); 
+            filter: drop-shadow(0 0 40px var(--blue));
+        }
+
+        @keyframes pyblink { 50% { opacity: 0; } }
         @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @media (max-width: 992px) { .editor-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -222,9 +254,39 @@
             </div>
         </section>
 
+        <section id="python-studio" class="python-section">
+            <span class="num">02. Texnologiya</span>
+            <h2 class="title" style="font-size: clamp(35px, 6vw, 70px);">Python <span style="color:var(--blue)">Daho</span> Studio</h2>
+            
+            <div class="editor-grid">
+                <div class="vscode-mockup" data-aos="fade-right">
+                    <div class="vscode-header">
+                        <div class="v-dot" style="background:#ff5f56"></div>
+                        <div class="v-dot" style="background:#ffbd2e"></div>
+                        <div class="v-dot" style="background:#27c93f"></div>
+                        <span style="margin-left:15px; font-size:12px; opacity:0.5;">main.py - YusufxonPro</span>
+                    </div>
+                    <div class="vscode-body">
+                        <div><span class="py-keyword">import</span> daho_ai</div>
+                        <div><span class="py-keyword">class</span> <span class="py-func">YusufxonSystem</span>:</div>
+                        <div>&nbsp;&nbsp;<span class="py-keyword">def</span> <span class="py-func">__init__</span>(self):</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;self.status = <span class="py-str">"Daho"</span></div>
+                        <br>
+                        <div style="color: #8b949e;"># Natijani ko'rish:</div>
+                        <div id="py-output" style="color: var(--accent); font-weight: bold; display:inline;"></div><span class="py-cursor"></span>
+                    </div>
+                </div>
+
+                <div class="python-logo-mockup" data-aos="zoom-in">
+                    <img src='https://i.postimg.cc/3xHSt4jp/python-logo-vector-download-free-11574197219exgflzvtyd.png' 
+                         alt='Python Daho Logo' class="py-img">
+                </div>
+            </div>
+        </section>
+
         <section id="history">
             <div class="glow-sphere" style="bottom: 0; left: -10%; background: radial-gradient(circle, rgba(88, 166, 255, 0.05) 0%, transparent 70%);"></div>
-            <span class="num">02. Missiya</span>
+            <span class="num">03. Missiya</span>
             <h2 class="title" style="font-size: clamp(40px, 7vw, 80px);">Daho Yo'li</h2>
             <div class="grid">
                 <div class="card" data-aos="fade-up">
@@ -241,7 +303,7 @@
         </section>
 
         <section id="kabinet">
-            <span class="num">03. Aloqa & Feed</span>
+            <span class="num">04. Aloqa & Feed</span>
             <h2 class="title" style="font-size: clamp(40px, 7vw, 80px);">Bog'lanish</h2>
             <div class="grid">
                 <div class="card" data-aos="fade-up">
@@ -265,7 +327,6 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // JS kodlari o'zgarmadi
         let messages = JSON.parse(localStorage.getItem('daho_msgs')) || [];
         let siteRating = localStorage.getItem('daho_rating') || 0;
 
@@ -284,6 +345,31 @@
                 }, 1000);
             }, 5500);
         };
+
+        // PYTHON STUDIO ANIMATION
+        const pyText = "> YusufxonPro algoritmi ishga tushdi...\n> Kelajak kodi muvaffaqiyatli yaratildi!";
+        let pyIdx = 0;
+        let isTyping = false;
+
+        function typePy() {
+            const out = document.getElementById("py-output");
+            if (pyIdx < pyText.length) {
+                out.innerHTML += pyText.charAt(pyIdx) === "\n" ? "<br>" : pyText.charAt(pyIdx);
+                pyIdx++;
+                setTimeout(typePy, 50);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            const section = document.getElementById('python-studio');
+            if(section) {
+                const pos = section.getBoundingClientRect().top;
+                if(pos < window.innerHeight * 0.7 && !isTyping) {
+                    isTyping = true;
+                    setTimeout(typePy, 1000);
+                }
+            }
+        });
 
         function renderFeed() {
             const box = document.getElementById('live-feed-box');
