@@ -14,50 +14,60 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-        /* --- LOADER --- */
-        #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s; }
-        .loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
+        /* --- DAHO LOADER (B -> X -> Y -> ISHM) --- */
+        #loader { 
+            position: fixed; inset: 0; background: var(--bg); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 10000; transition: 1s; 
+        }
+        .loader-circle { 
+            width: 150px; height: 150px; border: 2px solid rgba(0, 255, 136, 0.1); 
+            border-top: 3px solid var(--accent); border-radius: 50%; 
+            animation: spin 1s linear infinite; position: absolute; 
+        }
+        .loader-text { 
+            font-family: monospace; font-size: 24px; color: var(--accent); 
+            font-weight: bold; text-transform: uppercase; letter-spacing: 5px;
+            animation: letter-flicker 4s steps(1) infinite;
+        }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
+        @keyframes letter-flicker {
+            0% { content: "B"; }
+            20% { content: "X"; }
+            40% { content: "Y"; }
+            60% { content: "Axmatov"; font-size: 18px; }
+            80% { content: "Yusufxon"; font-size: 18px; }
+            100% { content: "B"; }
+        }
+        /* Harflar almashishi uchun pseudo-element */
+        .loader-text::after { content: "B"; animation: letter-flicker 4s steps(1) infinite; }
+
+        /* --- CONTENT STYLE --- */
         section { min-height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 80px 15%; position: relative; }
         .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
         .title { color: var(--white); font-size: clamp(40px, 8vw, 80px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
 
-        /* --- STUDIO GRID --- */
+        /* --- STUDIO --- */
         .studio-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; }
-        
-        .vscode-container { 
-            background: #0d1117; border: 1px solid #30363d; border-radius: 15px; overflow: hidden; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Fira Code', monospace;
-        }
+        .vscode-container { background: #0d1117; border: 1px solid #30363d; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .v-header { background: #161b22; padding: 12px 20px; display: flex; gap: 8px; align-items: center; }
         .v-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .v-body { padding: 20px; font-size: 14px; line-height: 1.6; color: #e6edf3; min-height: 350px; }
+        .v-body { padding: 20px; font-size: 14px; line-height: 1.6; color: #e6edf3; min-height: 350px; font-family: 'Fira Code', monospace; }
         
-        /* LIVE VIEW BOX */
-        .live-preview { 
-            margin-top: 20px; background: var(--white); border-radius: 10px; padding: 15px; 
-            color: #000; min-height: 100px; display: none; border: 3px solid var(--accent);
-            animation: fadeIn 0.5s;
-        }
+        .live-preview { margin-top: 20px; background: var(--white); border-radius: 10px; padding: 15px; color: #000; min-height: 100px; display: none; border: 3px solid var(--accent); animation: fadeIn 0.5s; }
 
-        /* DAHO IMAGE EFFECT */
+        /* --- IMAGE EFFECT --- */
         .daho-img-box { position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #30363d; transition: 0.5s; }
         .daho-img { 
             width: 100%; display: block; 
             filter: grayscale(100%) blur(4px) brightness(0.6); 
             transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(1.1);
         }
-        .daho-img-box:hover .daho-img { 
-            filter: grayscale(0%) blur(0px) brightness(1); 
-            transform: scale(1);
-        }
+        .daho-img-box:hover .daho-img { filter: grayscale(0%) blur(0px) brightness(1); transform: scale(1); }
         .daho-img-box:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); }
 
-        /* INTERACTION BAR (Like/Message) */
-        .interaction-bar { display: flex; gap: 15px; margin-top: 20px; align-items: center; }
-        .like-btn { color: var(--red); cursor: pointer; font-size: 24px; transition: 0.3s; }
-        .like-btn:active { transform: scale(1.5); }
+        /* --- UI ELEMENTS --- */
+        .interaction-bar { display: flex; gap: 15px; margin-top: 20px; }
         .msg-input { background: #161b22; border: 1px solid #30363d; color: var(--white); padding: 10px; border-radius: 5px; flex: 1; }
         .send-btn { background: var(--accent); color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
@@ -69,15 +79,14 @@
         .side { position: fixed; bottom: 0; display: flex; flex-direction: column; align-items: center; z-index: 500; }
         .side-l { left: 40px; } .side-r { right: 40px; }
         .v-line { width: 1px; height: 150px; background: linear-gradient(transparent, var(--accent)); }
-
-        @media (max-width: 992px) { .studio-grid { grid-template-columns: 1fr; } section { padding: 40px 5%; } }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <div class="loader-ring"></div>
-        <h1 style="color:var(--accent); margin-top:180px; letter-spacing:10px; font-size:14px; font-family: monospace;">DAHO_SYSTEM_RELOADING...</h1>
+        <div class="loader-circle"></div>
+        <div class="loader-text"></div>
+        <p style="color:var(--text); margin-top: 180px; font-family: monospace; font-size: 12px; letter-spacing: 2px;">INITIALIZING DAHO_CORE...</p>
     </div>
 
     <div class="side side-l">
@@ -89,12 +98,12 @@
         <section id="hero">
             <span class="num">00. Status: Online</span>
             <h1 class="title">Yusufxon <span style="color:var(--accent)">Axmatov</span></h1>
-            <p style="font-size:22px; max-width:650px;">11 yoshli daho dasturchi. Jizzax shahri markazidan butun dunyo uchun kod yozaman.</p>
+            <p style="font-size:22px; max-width:650px;">11 yoshli daho dasturchi. Jizzax shahridan butun dunyo uchun kod yozaman.</p>
         </section>
 
         <section id="daho-way">
-            <span class="num">01. Missiya</span>
-            <h2 class="title">Daho <span style="color:var(--blue)">Yo'li</span></h2>
+            <span class="num">01. Studio</span>
+            <h2 class="title">Daho <span style="color:var(--blue)">Coding</span></h2>
             
             <div class="studio-grid">
                 <div class="editor-wrap">
@@ -103,27 +112,25 @@
                             <div class="v-dot" style="background:#ff5f56"></div>
                             <div class="v-dot" style="background:#ffbd2e"></div>
                             <div class="v-dot" style="background:#27c93f"></div>
-                            <span id="file-name" style="font-size:12px; margin-left:10px; opacity:0.6;">daho.py</span>
+                            <span id="file-name" style="font-size:12px; margin-left:10px; opacity:0.6;">daho_system.py</span>
                         </div>
-                        <div class="v-body" id="code-editor">
-                            </div>
+                        <div class="v-body" id="code-editor"></div>
                     </div>
                     
                     <div id="html-preview" class="live-preview">
                         <h2 style="color:#000">Daho Yusufxon</h2>
-                        <p>Jizzax shahridan maxsus natija!</p>
-                        <button style="margin-top:10px; padding:5px 15px; background:var(--bg); color:var(--accent); border:none; border-radius:4px;">Daho Tugmasi</button>
+                        <p>Jizzax shahridan professional natija!</p>
+                        <button style="margin-top:10px; padding:8px 15px; background:var(--bg); color:var(--accent); border:none; border-radius:4px; font-weight:bold;">LIVE ACTION</button>
                     </div>
 
                     <div class="interaction-bar">
-                        <i class="fas fa-heart like-btn" onclick="this.classList.toggle('fas'); this.classList.toggle('far');"></i>
-                        <input type="text" class="msg-input" placeholder="Dahoga xabar yozing...">
-                        <button class="send-btn" onclick="alert('Xabar Jizzaxga yuborildi!')">Yuborish</button>
+                        <input type="text" class="msg-input" placeholder="Xabar qoldiring...">
+                        <button class="send-btn" onclick="alert('Dahoga xabar ketdi!')">Yuborish</button>
                     </div>
                 </div>
 
                 <div class="daho-img-box" data-aos="zoom-in">
-                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon Axmatov" class="daho-img">
+                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon" class="daho-img">
                 </div>
             </div>
         </section>
@@ -137,44 +144,44 @@
     <script>
         AOS.init({ duration: 1000 });
 
+        // Loader 4 soniya ishlaydi (harflar almashishi uchun)
         window.onload = () => {
             setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('content').style.opacity = '1';
-                startDahoCycle();
-            }, 3000);
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').style.opacity = '1';
+                    startDahoCycle();
+                }, 1000);
+            }, 4500);
         };
 
-        const pythonCode = `<span class="py-kw">import</span> daho_system\n\n<span class="py-kw">class</span> <span class="val">Yusufxon</span>:\n    location = <span class="val">"Jizzax City"</span>\n    age = <span class="val">11</span>\n    \n    <span class="py-kw">def</span> <span class="attr">create_future</span>(self):\n        print(<span class="val">"Kodlar dunyoni o'zgartiradi"</span>)\n\n<span class="tag"># Daho tizimi ishga tushdi...</span>`;
+        const pythonCode = `<span class="py-kw">import</span> daho_core\n\n<span class="py-kw">class</span> <span class="val">Developer</span>:\n    city = <span class="val">"Jizzax"</span>\n    name = <span class="val">"Yusufxon"</span>\n\n    <span class="py-kw">def</span> <span class="attr">build</span>(self):\n        print(<span class="val">"Daho System Active"</span>)`;
         
-        const htmlCode = `<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"daho-card"</span><span class="tag">&gt;</span>\n  <span class="tag">&lt;h2&gt;</span>Daho Yusufxon<span class="tag">&lt;/h2&gt;</span>\n  <span class="tag">&lt;p&gt;</span>Jizzax shahridan salom!<span class="tag">&lt;/p&gt;</span>\n  <span class="tag">&lt;button&gt;</span>Daho Tugmasi<span class="tag">&lt;/button&gt;</span>\n<span class="tag">&lt;/div&gt;</span>\n\n<span class="tag">&lt;!-- Natija pastda ko'rinadi --&gt;</span>`;
+        const htmlCode = `<span class="tag">&lt;section&gt;</span>\n  <span class="tag">&lt;h1&gt;</span>YusufxonPro<span class="tag">&lt;/h1&gt;</span>\n  <span class="tag">&lt;p&gt;</span>Jizzax Shahri<span class="tag">&lt;/p&gt;</span>\n  <span class="tag">&lt;button&gt;</span>Active<span class="tag">&lt;/button&gt;</span>\n<span class="tag">&lt;/section&gt;</span>`;
 
         const editor = document.getElementById('code-editor');
         const fileName = document.getElementById('file-name');
         const preview = document.getElementById('html-preview');
 
-        async function typeCode(code, element, speed = 30) {
+        async function typeCode(code, element) {
             element.innerHTML = "";
-            let i = 0;
-            let currentHTML = "";
-            
-            // Bu qism HTML teglarni buzmasdan yozish uchun
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = code;
-            const nodes = Array.from(tempDiv.childNodes);
+            const temp = document.createElement('div');
+            temp.innerHTML = code;
+            const nodes = Array.from(temp.childNodes);
 
             for (let node of nodes) {
-                if (node.nodeType === 3) { // Text node
+                if (node.nodeType === 3) {
                     for (let char of node.textContent) {
                         element.innerHTML += char;
-                        await new Promise(r => setTimeout(r, speed));
+                        await new Promise(r => setTimeout(r, 30));
                     }
-                } else { // Element node (span)
+                } else {
                     let span = node.cloneNode(false);
                     element.appendChild(span);
                     for (let char of node.textContent) {
                         span.textContent += char;
-                        await new Promise(r => setTimeout(r, speed));
+                        await new Promise(r => setTimeout(r, 30));
                     }
                 }
             }
@@ -183,20 +190,19 @@
 
         async function startDahoCycle() {
             while(true) {
-                // 1. Python yoziladi
-                fileName.innerText = "daho_system.py";
+                // PYTHON
+                fileName.innerText = "daho_core.py";
                 preview.style.display = "none";
                 await typeCode(pythonCode, editor);
-                await new Promise(r => setTimeout(r, 7000)); // 7 soniya kutish
+                await new Promise(r => setTimeout(r, 7000));
 
-                // 2. HTML yoziladi
+                // HTML
                 fileName.innerText = "index.html";
                 await typeCode(htmlCode, editor);
-                preview.style.display = "block"; // Natijani ko'rsatish
-                await new Promise(r => setTimeout(r, 7000)); // 7 soniya kutish
+                preview.style.display = "block";
+                await new Promise(r => setTimeout(r, 7000));
                 
                 editor.innerHTML = "";
-                preview.style.display = "none";
             }
         }
     </script>
