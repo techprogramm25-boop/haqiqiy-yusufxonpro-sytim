@@ -3,140 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YusufxonPro.uz | Daho System</title>
+    <title>YusufxonPro.uz</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         :root { 
             --bg: #010409; --accent: #00ff88; --text: #8b949e; --white: #f0f6fc; 
-            --card: rgba(22, 27, 34, 0.8); --red: #ff4d4d; --blue: #58a6ff;
+            --card: rgba(22, 27, 34, 0.8); --red: #ff4d4d; --blue: #58a6ff; --gold: #ffb700;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-        /* --- DAHO LOADER (B -> X -> Y -> ISHM) --- */
-        #loader { 
-            position: fixed; inset: 0; background: var(--bg); 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            z-index: 10000; transition: 1s; 
-        }
-        .loader-circle { 
-            width: 150px; height: 150px; border: 2px solid rgba(0, 255, 136, 0.1); 
-            border-top: 3px solid var(--accent); border-radius: 50%; 
-            animation: spin 1s linear infinite; position: absolute; 
-        }
-        .loader-text { 
-            font-family: monospace; font-size: 24px; color: var(--accent); 
-            font-weight: bold; text-transform: uppercase; letter-spacing: 5px;
-            animation: letter-flicker 4s steps(1) infinite;
-        }
+        /* --- DAHO ULTRA LOADER --- */
+        #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s; }
+        .loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
+        .char { position: absolute; font-size: 70px; font-weight: 900; opacity: 0; filter: blur(5px); }
+        .b { color: var(--accent); animation: fI 0.5s 1s forwards, fO 0.5s 2s forwards; }
+        .x { color: var(--red); animation: fI 0.4s 2.2s forwards, fO 0.3s 3s forwards; }
+        .y { color: var(--accent); animation: fI 0.5s 3.2s forwards; text-shadow: 0 0 30px var(--accent); }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes letter-flicker {
-            0% { content: "B"; }
-            20% { content: "X"; }
-            40% { content: "Y"; }
-            60% { content: "Axmatov"; font-size: 18px; }
-            80% { content: "Yusufxon"; font-size: 18px; }
-            100% { content: "B"; }
-        }
-        /* Harflar almashishi uchun pseudo-element */
-        .loader-text::after { content: "B"; animation: letter-flicker 4s steps(1) infinite; }
+        @keyframes fI { to { opacity: 1; filter: blur(0); } }
+        @keyframes fO { to { opacity: 0; transform: scale(1.5); filter: blur(10px); } }
 
-        /* --- CONTENT STYLE --- */
-        section { min-height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 80px 15%; position: relative; }
+        section { min-height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 60px 10%; position: relative; }
         .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
-        .title { color: var(--white); font-size: clamp(40px, 8vw, 80px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
+        .title { color: var(--white); font-size: clamp(35px, 8vw, 80px); font-weight: 900; line-height: 1; margin-bottom: 20px; }
 
-        /* --- STUDIO --- */
-        .studio-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; }
-        .vscode-container { background: #0d1117; border: 1px solid #30363d; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        .v-header { background: #161b22; padding: 12px 20px; display: flex; gap: 8px; align-items: center; }
-        .v-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .v-body { padding: 20px; font-size: 14px; line-height: 1.6; color: #e6edf3; min-height: 350px; font-family: 'Fira Code', monospace; }
-        
-        .live-preview { margin-top: 20px; background: var(--white); border-radius: 10px; padding: 15px; color: #000; min-height: 100px; display: none; border: 3px solid var(--accent); animation: fadeIn 0.5s; }
-
-        /* --- IMAGE EFFECT --- */
-        .daho-img-box { position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #30363d; transition: 0.5s; }
-        .daho-img { 
-            width: 100%; display: block; 
-            filter: grayscale(100%) blur(4px) brightness(0.6); 
-            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: scale(1.1);
+        /* --- STUDIO GRID SYSTEM --- */
+        .studio-container { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; 
+            background: #0d1117; border: 1px solid #30363d; border-radius: 12px; 
+            overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); margin-top: 20px;
         }
-        .daho-img-box:hover .daho-img { filter: grayscale(0%) blur(0px) brightness(1); transform: scale(1); }
-        .daho-img-box:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 136, 0.4); }
+        .editor-pane, .preview-pane { height: 400px; display: flex; flex-direction: column; }
+        .pane-header { background: #161b22; padding: 10px 20px; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; }
+        .pane-body { padding: 20px; flex: 1; overflow-y: auto; font-family: 'Fira Code', monospace; font-size: 14px; }
 
-        /* --- UI ELEMENTS --- */
-        .interaction-bar { display: flex; gap: 15px; margin-top: 20px; }
-        .msg-input { background: #161b22; border: 1px solid #30363d; color: var(--white); padding: 10px; border-radius: 5px; flex: 1; }
-        .send-btn { background: var(--accent); color: #000; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
-        .tag { color: #7ee787; } .attr { color: #79c0ff; } .val { color: #a5d6ff; } .py-kw { color: #ff7b72; }
-        .cursor { border-left: 2px solid var(--accent); animation: blink 0.8s infinite; margin-left: 3px; }
+        /* Editor Styles */
+        .tag { color: #7ee787; } .attr { color: #79c0ff; } .val { color: #a5d6ff; } .py-kw { color: #ff7b72; } .py-fn { color: #d2a8ff; }
+        .cursor { border-left: 2px solid var(--accent); animation: blink 0.8s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* HTML Preview Box */
+        .html-result { background: white; border-radius: 8px; height: 100%; padding: 20px; color: black; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        /* Python Terminal Box */
+        .py-terminal { background: #000; color: var(--accent); height: 100%; border-radius: 8px; padding: 15px; border: 1px solid #333; }
+
+        /* DAHO IMAGE EFFECT */
+        .daho-img-box { position: absolute; right: 5%; bottom: 10%; width: 250px; border-radius: 20px; overflow: hidden; border: 2px solid #30363d; transition: 0.5s; z-index: 10; }
+        .daho-img { width: 100%; display: block; filter: grayscale(100%) blur(2px); transition: 0.6s; transform: scale(1.05); }
+        .daho-img-box:hover .daho-img { filter: grayscale(0%) blur(0px); transform: scale(1); }
+        .daho-img-box:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
 
         .side { position: fixed; bottom: 0; display: flex; flex-direction: column; align-items: center; z-index: 500; }
         .side-l { left: 40px; } .side-r { right: 40px; }
         .v-line { width: 1px; height: 150px; background: linear-gradient(transparent, var(--accent)); }
+
+        @media (max-width: 992px) { .studio-container { grid-template-columns: 1fr; } .daho-img-box { display: none; } }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <div class="loader-circle"></div>
-        <div class="loader-text"></div>
-        <p style="color:var(--text); margin-top: 180px; font-family: monospace; font-size: 12px; letter-spacing: 2px;">INITIALIZING DAHO_CORE...</p>
+        <div class="loader-ring"></div>
+        <span class="char b">B</span>
+        <span class="char x">✕</span>
+        <span class="char y">Y</span>
+        <div style="margin-top:180px; color:var(--white); letter-spacing:10px; font-size:12px;">DAHO SYSTEM LOADING...</div>
     </div>
 
-    <div class="side side-l">
-        <div style="color:var(--text); font-size:20px; margin-bottom:20px;"><i class="fab fa-github"></i></div>
-        <div class="v-line"></div>
-    </div>
-
-    <div id="content" style="opacity:0; transition: 1.5s;">
+    <div id="content" style="opacity:0; transition: 2s;">
         <section id="hero">
-            <span class="num">00. Status: Online</span>
+            <span class="num">00. Salom</span>
             <h1 class="title">Yusufxon <span style="color:var(--accent)">Axmatov</span></h1>
-            <p style="font-size:22px; max-width:650px;">11 yoshli daho dasturchi. Jizzax shahridan butun dunyo uchun kod yozaman.</p>
+            <p style="font-size:22px; max-width:600px;">11 yoshli daho dasturchi. Jizzaxdan turib kelajakni kodlayman.</p>
+            
+            <div class="daho-img-box" data-aos="zoom-in">
+                <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon" class="daho-img">
+            </div>
         </section>
 
-        <section id="daho-way">
-            <span class="num">01. Studio</span>
-            <h2 class="title">Daho <span style="color:var(--blue)">Coding</span></h2>
+        <section id="python-studio">
+            <span class="num">01. Backend Art</span>
+            <h2 class="title">Python <span style="color:var(--blue)">Daho</span> Studio</h2>
             
-            <div class="studio-grid">
-                <div class="editor-wrap">
-                    <div class="vscode-container">
-                        <div class="v-header">
-                            <div class="v-dot" style="background:#ff5f56"></div>
-                            <div class="v-dot" style="background:#ffbd2e"></div>
-                            <div class="v-dot" style="background:#27c93f"></div>
-                            <span id="file-name" style="font-size:12px; margin-left:10px; opacity:0.6;">daho_system.py</span>
-                        </div>
-                        <div class="v-body" id="code-editor"></div>
+            <div class="studio-container" data-aos="fade-up">
+                <div class="editor-pane">
+                    <div class="pane-header">
+                        <span style="font-size:12px;"><i class="fab fa-python" style="color:var(--blue)"></i> main.py</span>
+                        <div style="display:flex; gap:5px;"><div class="v-dot" style="background:#ff5f56; width:10px; height:10px; border-radius:50%"></div><div class="v-dot" style="background:#ffbd2e; width:10px; height:10px; border-radius:50%"></div><div class="v-dot" style="background:#27c93f; width:10px; height:10px; border-radius:50%"></div></div>
                     </div>
-                    
-                    <div id="html-preview" class="live-preview">
-                        <h2 style="color:#000">Daho Yusufxon</h2>
-                        <p>Jizzax shahridan professional natija!</p>
-                        <button style="margin-top:10px; padding:8px 15px; background:var(--bg); color:var(--accent); border:none; border-radius:4px; font-weight:bold;">LIVE ACTION</button>
-                    </div>
-
-                    <div class="interaction-bar">
-                        <input type="text" class="msg-input" placeholder="Xabar qoldiring...">
-                        <button class="send-btn" onclick="alert('Dahoga xabar ketdi!')">Yuborish</button>
-                    </div>
+                    <div class="pane-body" id="py-editor"></div>
                 </div>
-
-                <div class="daho-img-box" data-aos="zoom-in">
-                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon" class="daho-img">
+                <div class="preview-pane">
+                    <div class="pane-header"><span><i class="fas fa-terminal"></i> Terminal</span></div>
+                    <div class="pane-body">
+                        <div class="py-terminal" id="py-terminal-out"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <footer style="text-align:center; padding:50px;">
-            <p style="color:var(--accent); font-family:monospace; letter-spacing: 5px;">YUSUFXON PRO • JIZZAX SHAHRI • 2026</p>
+        <section id="html-studio">
+            <span class="num">02. Frontend Art</span>
+            <h2 class="title">HTML <span style="color:var(--accent)">Daho</span> Studio</h2>
+            
+            <div class="studio-container" data-aos="fade-up">
+                <div class="editor-pane">
+                    <div class="pane-header">
+                        <span style="font-size:12px;"><i class="fab fa-html5" style="color:#e34c26"></i> index.html</span>
+                    </div>
+                    <div class="pane-body" id="html-editor"></div>
+                </div>
+                <div class="preview-pane">
+                    <div class="pane-header"><span><i class="fas fa-eye"></i> Live Preview</span></div>
+                    <div class="pane-body">
+                        <div class="html-result" id="html-live-view">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align:center; padding:100px;">
+            <p style="color:var(--accent); font-family:monospace; letter-spacing: 5px;">YUSUFXON AXMATOV • 2026</p>
         </footer>
     </div>
 
@@ -144,65 +136,64 @@
     <script>
         AOS.init({ duration: 1000 });
 
-        // Loader 4 soniya ishlaydi (harflar almashishi uchun)
         window.onload = () => {
             setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('content').style.opacity = '1';
-                    startDahoCycle();
-                }, 1000);
-            }, 4500);
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.opacity = '1';
+                startDahoCycles();
+            }, 5000);
         };
 
-        const pythonCode = `<span class="py-kw">import</span> daho_core\n\n<span class="py-kw">class</span> <span class="val">Developer</span>:\n    city = <span class="val">"Jizzax"</span>\n    name = <span class="val">"Yusufxon"</span>\n\n    <span class="py-kw">def</span> <span class="attr">build</span>(self):\n        print(<span class="val">"Daho System Active"</span>)`;
+        const pyCode = `<span class="py-kw">class</span> <span class="py-fn">Daho</span>:\n  <span class="py-kw">def</span> <span class="py-fn">__init__</span>(self):\n    self.name = <span class="val">"Yusufxon"</span>\n    self.city = <span class="val">"Jizzax"</span>\n\n  <span class="py-kw">def</span> <span class="py-fn">status</span>(self):\n    <span class="py-kw">return</span> <span class="val">"System Active"</span>\n\nprint(<span class="val">"Daho tizimi yuklandi..."</span>)`;
         
-        const htmlCode = `<span class="tag">&lt;section&gt;</span>\n  <span class="tag">&lt;h1&gt;</span>YusufxonPro<span class="tag">&lt;/h1&gt;</span>\n  <span class="tag">&lt;p&gt;</span>Jizzax Shahri<span class="tag">&lt;/p&gt;</span>\n  <span class="tag">&lt;button&gt;</span>Active<span class="tag">&lt;/button&gt;</span>\n<span class="tag">&lt;/section&gt;</span>`;
+        const htmlCode = `<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>\n  <span class="tag">&lt;h1&gt;</span>YusufxonPro<span class="tag">&lt;/h1&gt;</span>\n  <span class="tag">&lt;p&gt;</span>Daho Dasturchi<span class="tag">&lt;/p&gt;</span>\n  <span class="tag">&lt;button&gt;</span>Start<span class="tag">&lt;/button&gt;</span>\n<span class="tag">&lt;/div&gt;</span>`;
 
-        const editor = document.getElementById('code-editor');
-        const fileName = document.getElementById('file-name');
-        const preview = document.getElementById('html-preview');
+        const pyEditor = document.getElementById('py-editor');
+        const pyTerm = document.getElementById('py-terminal-out');
+        const htmlEditor = document.getElementById('html-editor');
+        const htmlView = document.getElementById('html-live-view');
 
-        async function typeCode(code, element) {
+        async function typeWriter(code, element, speed = 40) {
             element.innerHTML = "";
-            const temp = document.createElement('div');
-            temp.innerHTML = code;
-            const nodes = Array.from(temp.childNodes);
-
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = code;
+            let nodes = Array.from(tempDiv.childNodes);
+            
             for (let node of nodes) {
                 if (node.nodeType === 3) {
                     for (let char of node.textContent) {
                         element.innerHTML += char;
-                        await new Promise(r => setTimeout(r, 30));
+                        await new Promise(r => setTimeout(r, speed));
                     }
                 } else {
                     let span = node.cloneNode(false);
                     element.appendChild(span);
                     for (let char of node.textContent) {
                         span.textContent += char;
-                        await new Promise(r => setTimeout(r, 30));
+                        await new Promise(r => setTimeout(r, speed));
                     }
                 }
             }
             element.innerHTML += '<span class="cursor"></span>';
         }
 
-        async function startDahoCycle() {
+        async function startDahoCycles() {
             while(true) {
-                // PYTHON
-                fileName.innerText = "daho_core.py";
-                preview.style.display = "none";
-                await typeCode(pythonCode, editor);
+                // 1. PYTHON CYCLE
+                await typeWriter(pyCode, pyEditor);
+                pyTerm.innerHTML = "> Python script running...<br>> Status: OK<br>> Daho tizimi yuklandi...";
                 await new Promise(r => setTimeout(r, 7000));
+                pyEditor.innerHTML = ""; pyTerm.innerHTML = "";
 
-                // HTML
-                fileName.innerText = "index.html";
-                await typeCode(htmlCode, editor);
-                preview.style.display = "block";
+                // 2. HTML CYCLE
+                await typeWriter(htmlCode, htmlEditor);
+                htmlView.innerHTML = `<div style="padding:20px; border:2px solid #00ff88; border-radius:10px;">
+                    <h2 style="color:#010409">YusufxonPro</h2>
+                    <p style="color:#666">Daho Dasturchi</p>
+                    <button style="background:#010409; color:#00ff88; border:none; padding:10px 20px; border-radius:5px; margin-top:10px;">Start</button>
+                </div>`;
                 await new Promise(r => setTimeout(r, 7000));
-                
-                editor.innerHTML = "";
+                htmlEditor.innerHTML = ""; htmlView.innerHTML = "";
             }
         }
     </script>
