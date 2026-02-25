@@ -3,10 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusufxon Axmatov | Daho Dev Portfolio</title>
     
-    <meta name="description" content="Yusufxon Axmatov - 10 yoshli daho dasturchi. Jizzaxdan turib butun dunyo uchun professional web-saytlar va AI tizimlar yaratadi.">
-    <meta name="keywords" content="Yusufxon Axmatov, Yusufxon Pro, Daho Dev, yusufxonpro.uz, daho dasturchi, Jizzax IT, full-stack developer">
+    <title>Yusufxon Axmatov | YusufxonPro - Daho Dev Portfolio</title>
+    <meta name="description" content="Yusufxon Axmatov (YusufxonPro) - 10 yoshli daho dasturchi. Jizzaxdan turib professional web-saytlar va AI tizimlar yaratadi.">
+    <meta name="keywords" content="Yusufxon Axmatov, Yusufxon Pro, yusufxonpro.uz, Daho Dev, daho dasturchi, Jizzax IT, dasturchi bolakay, full-stack developer">
+    <meta name="author" content="Yusufxon Axmatov">
+    <link rel="canonical" href="https://yusufxonpro.uz/">
+
+    <meta property="og:title" content="Yusufxon Axmatov | Daho Dev Portfolio">
+    <meta property="og:description" content="10 yoshli daho dasturchi Yusufxon Axmatovning professional portfoliosi.">
+    <meta property="og:url" content="https://yusufxonpro.uz">
+    <meta property="og:type" content="website">
+
     <meta name="robots" content="index, follow">
 
     <script type="application/ld+json">
@@ -18,9 +26,15 @@
       "url": "https://yusufxonpro.uz",
       "jobTitle": "Full-stack Developer",
       "description": "10 yoshli daho dasturchi va Daho Dev asoschisi.",
-      "knowsAbout": ["Python", "Web Development", "Artificial Intelligence"]
+      "knowsAbout": ["Python", "Web Development", "Artificial Intelligence"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Jizzax",
+        "addressCountry": "UZ"
+      }
     }
     </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
@@ -109,9 +123,6 @@
         .card:hover { border-color: var(--accent); transform: translateY(-20px) scale(1.02); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5); }
         .card h3 { color: var(--white); margin-bottom: 20px; font-size: 28px; font-weight: 800; }
 
-        .premium-box { border: 2px solid var(--gold); padding: 40px; border-radius: 20px; margin-top: 40px; position: relative; background: rgba(255, 183, 0, 0.03); }
-        .premium-box::after { content: "VIP ACCESS"; position: absolute; top: 15px; right: -40px; background: var(--gold); color: black; padding: 8px 50px; transform: rotate(45deg); font-weight: 900; font-size: 11px; }
-
         input, textarea { width: 100%; padding: 20px; margin-bottom: 20px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 12px; outline: none; transition: 0.4s; font-size: 16px; }
         input:focus, textarea:focus { border-color: var(--accent); background: #161b22; }
 
@@ -122,7 +133,6 @@
 
         footer { text-align: center; padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.03); }
 
-        /* --- NEW LIVE FEED & LIKE UI --- */
         #live-feed-box { margin-top: 30px; height: 300px; overflow-y: auto; padding-right: 10px; }
         .feed-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 3px solid var(--accent); animation: slideIn 0.5s ease forwards; }
         .feed-actions { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
@@ -165,9 +175,9 @@
 
     <div class="side side-l">
         <div class="social">
-            <a href="https://github.com/techprogramm25-boop" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/yusufxonpro/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://github.com/techprogramm25-boop" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/yusufxonpro/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
         </div>
         <div class="v-line"></div>
     </div>
@@ -233,8 +243,7 @@
                 </div>
                 <div class="card" data-aos="fade-up" data-aos-delay="200">
                     <h3 style="margin-bottom:25px;"><i class="fas fa-rss"></i> Live Feed</h3>
-                    <div id="live-feed-box">
-                        </div>
+                    <div id="live-feed-box"></div>
                 </div>
             </div>
         </section>
@@ -247,7 +256,6 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // MA'LUMOTLARNI SAQLASH UCHUN ARRAYLAR
         let messages = JSON.parse(localStorage.getItem('daho_msgs')) || [];
         let siteRating = localStorage.getItem('daho_rating') || 0;
 
@@ -267,7 +275,6 @@
             }, 5500);
         };
 
-        // FEEDNI CHIQRISH VA LIKE TIZIMI
         function renderFeed() {
             const box = document.getElementById('live-feed-box');
             box.innerHTML = messages.length ? messages.map((x, index) => `
@@ -315,7 +322,7 @@
             const m = document.getElementById('message').value;
             if(s && m) {
                 const newMsg = {s, m, t: new Date().toLocaleTimeString(), likes: 0, liked: false};
-                messages.unshift(newMsg); // Yangisini tepaga qo'shish
+                messages.unshift(newMsg);
                 localStorage.setItem('daho_msgs', JSON.stringify(messages));
                 renderFeed();
                 alert("Daho Yusufxon: Xabaringiz qabul qilindi!");
