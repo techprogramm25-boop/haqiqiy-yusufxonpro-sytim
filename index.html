@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YusufxonPro.uz | HTML Daho</title>
+    <title>YusufxonPro.uz | Jizzaxlik Daho</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
@@ -14,144 +15,153 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-        /* Loader & Elements (Oldindan borlari) */
+        /* --- LOADER --- */
         #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s; }
-        .loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
+        .loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         
-        section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 0 15%; position: relative; }
+        section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; position: relative; }
         .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
         .title { color: var(--white); font-size: clamp(40px, 8vw, 90px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
 
-        /* HTML STUDIO STYLE */
-        .html-studio { background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.03), transparent); }
-        .editor-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        /* --- HTML DAHO STUDIO (SHAHAR USLUBIDA) --- */
+        .html-studio { background: radial-gradient(circle at bottom left, rgba(88, 166, 255, 0.05), transparent); }
+        .editor-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 40px; align-items: center; }
         
-        .vscode-html { 
-            background: #0d1117; border: 1px solid #30363d; border-radius: 15px; overflow: hidden; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Fira Code', monospace;
+        .vscode-box { 
+            background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7); font-family: 'Fira Code', monospace;
         }
-        .v-header { background: #161b22; padding: 10px 20px; display: flex; gap: 8px; }
-        .v-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .v-body { padding: 20px; font-size: 15px; line-height: 1.5; color: #e6edf3; min-height: 280px; }
+        .v-head { background: #161b22; padding: 12px; display: flex; gap: 8px; border-bottom: 1px solid #30363d; }
+        .v-body { padding: 25px; font-size: 16px; line-height: 1.6; color: #e6edf3; min-height: 300px; }
         
-        .tag { color: #7ee787; } /* HTML Tags */
-        .attr { color: #79c0ff; } /* Attributes */
-        .val { color: #a5d6ff; }  /* Values */
-        .cursor { border-left: 2px solid var(--accent); animation: blink 0.8s infinite; margin-left: 3px; }
-        @keyframes blink { 50% { opacity: 0; } }
+        /* HTML Ranglari */
+        .t-tag { color: #7ee787; } 
+        .t-attr { color: #79c0ff; } 
+        .t-val { color: #a5d6ff; }
+        .py-cursor { border-left: 3px solid var(--accent); animation: blink 0.8s infinite; margin-left: 5px; }
 
-        /* DAHO IMAGE EFFECT */
-        .daho-img-box { position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #30363d; transition: 0.5s; }
-        .daho-img { 
-            width: 100%; display: block; 
-            filter: grayscale(100%) blur(2px); /* Qora-oq va xira */
-            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: scale(1.05);
+        /* --- RASM EFFEKTI (SICHQONCHA BILAN O'YIN) --- */
+        .daho-img-container { 
+            position: relative; border-radius: 20px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.5s;
+            cursor: crosshair;
         }
-        .daho-img-box:hover .daho-img { 
-            filter: grayscale(0%) blur(0px); /* Asl holat */
+        .yusufxon-img { 
+            width: 100%; display: block; 
+            filter: grayscale(100%) brightness(0.5) blur(3px); /* Qora-oq, qorong'u va xira */
+            transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: scale(1.1);
+        }
+        .daho-img-container:hover .yusufxon-img { 
+            filter: grayscale(0%) brightness(1) blur(0px); /* Asl rang va tiniqlik */
             transform: scale(1);
         }
-        .daho-img-box:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); }
+        .daho-img-container:hover { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+        }
 
-        /* Sidebars & Buttons */
+        /* Sidebars & Extras */
         .side { position: fixed; bottom: 0; display: flex; flex-direction: column; align-items: center; z-index: 500; }
         .side-l { left: 40px; } .side-r { right: 40px; }
         .v-line { width: 1px; height: 150px; background: linear-gradient(transparent, var(--accent)); }
-        .btn { padding: 15px 35px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.4s; }
-        .btn:hover { background: rgba(0, 255, 136, 0.1); box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
 
-        @media (max-width: 992px) { .editor-container { grid-template-columns: 1fr; } }
+        @keyframes blink { 50% { opacity: 0; } }
+        @media (max-width: 992px) { .editor-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div id="loader">
         <div class="loader-ring"></div>
-        <h1 style="color:var(--accent); margin-top:180px; letter-spacing:10px; font-size:14px;">DAHO SYSTEM LOADING...</h1>
+        <div style="color:var(--white); margin-top:20px; font-family:monospace;">DAHO_RELOAD_SYSTEM...</div>
     </div>
 
-    <div class="side side-l">
-        <div style="color:var(--text); font-size:20px; margin-bottom:20px;"><i class="fab fa-github"></i></div>
-        <div class="v-line"></div>
-    </div>
-
-    <div id="content" style="opacity:0; transition: 1.5s;">
+    <div id="content" style="opacity:0; transition: 2s;">
         <section id="hero">
-            <span class="num">00. Salom</span>
-            <h1 class="title">Yusufxon <span style="color:var(--accent)">Axmatov</span></h1>
-            <p style="font-size:20px; max-width:600px;">11 yoshli daho dasturchi portfolioga xush kelibsiz.</p>
+            <span class="num">00. Status: Online</span>
+            <h1 class="title">Yusufxon<br><span style="color:var(--accent)">Axmatov.</span></h1>
+            <p style="font-size: 24px; max-width: 700px;">Men 11 yoshli daho dasturchiman. <b style="color:var(--white)">Jizzax shahridan</b> turib, global raqamli kelajakni barpo etaman.</p>
         </section>
 
-        <section id="history" style="height:auto; padding: 100px 15%;">
+        <section id="history" style="height:auto; padding: 100px 10%;">
             <span class="num">01. Missiya</span>
             <h2 class="title">Daho Yo'li</h2>
-            <p style="font-size:18px;">Men kodlar bilan dunyoni o'zgartiraman.</p>
+            <div style="background:var(--card); padding:40px; border-radius:20px; border-left: 5px solid var(--accent);">
+                <p style="font-size:20px;">Men shunchaki kod yozmayman, men Jizzax shahri IT salohiyatini dunyoga tanituvchi algoritmlar yarataman.</p>
+            </div>
         </section>
 
         <section id="html-studio" class="html-studio">
-            <span class="num">02. Web San'ati</span>
-            <h2 class="title">HTML <span style="color:var(--blue)">Daho</span> Studio</h2>
+            <span class="num">02. Studio: HTML</span>
+            <h2 class="title">HTML <span style="color:var(--blue)">Daho</span> Developer</h2>
 
-            <div class="editor-container">
-                <div class="vscode-html" data-aos="fade-right">
-                    <div class="v-header">
-                        <div class="v-dot" style="background:#ff5f56"></div>
-                        <div class="v-dot" style="background:#ffbd2e"></div>
-                        <div class="v-dot" style="background:#27c93f"></div>
+            <div class="editor-grid">
+                <div class="vscode-box" data-aos="fade-right">
+                    <div class="v-head">
+                        <div style="width:12px; height:12px; border-radius:50%; background:#ff5f56"></div>
+                        <div style="width:12px; height:12px; border-radius:50%; background:#ffbd2e"></div>
+                        <div style="width:12px; height:12px; border-radius:50%; background:#27c93f"></div>
+                        <span style="font-size:12px; opacity:0.5; margin-left:10px;">daho_index.html - YusufxonPro</span>
                     </div>
                     <div class="v-body">
-                        <div><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"daho-system"</span><span class="tag">&gt;</span></div>
-                        <div style="padding-left:20px;"><span class="tag">&lt;h1&gt;</span>YusufxonPro Kelajakni Yaratadi<span class="tag">&lt;/h1&gt;</span></div>
-                        <div style="padding-left:20px;"><span class="tag">&lt;p&gt;</span>Kod - bu mening san'atim.<span class="tag">&lt;/p&gt;</span></div>
-                        <div style="padding-left:20px;"><span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="val">"launch()"</span><span class="tag">&gt;</span>Start<span class="tag">&lt;/button&gt;</span></div>
-                        <div><span class="tag">&lt;/div&gt;</span></div>
+                        <div><span class="t-tag">&lt;div</span> <span class="t-attr">id</span>=<span class="t-val">"jizzax-city-node"</span><span class="t-tag">&gt;</span></div>
+                        <div style="padding-left:25px;"><span class="t-tag">&lt;h1&gt;</span>Daho Yusufxon Axmatov<span class="t-tag">&lt;/h1&gt;</span></div>
+                        <div style="padding-left:25px;"><span class="t-tag">&lt;p&gt;</span>Shahar markazidan turib kodlayman...<span class="t-tag">&lt;/p&gt;</span></div>
+                        <div style="padding-left:25px;"><span class="t-tag">&lt;script&gt;</span>console.log(<span class="t-val">"Daho System Active"</span>);<span class="t-tag">&lt;/script&gt;</span></div>
+                        <div><span class="t-tag">&lt;/div&gt;</span></div>
                         <br>
-                        <div style="color:var(--accent); font-family:monospace;" id="html-run-text"></div><span class="cursor"></span>
+                        <div id="html-status" style="color:var(--accent); font-weight:bold;"></div><span class="py-cursor"></span>
                     </div>
                 </div>
 
-                <div class="daho-img-box" data-aos="zoom-in">
-                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon Axmatov" class="daho-img">
+                <div class="daho-img-container" data-aos="zoom-in">
+                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon Axmatov" class="yusufxon-img">
                 </div>
             </div>
         </section>
 
-        <footer style="text-align:center; padding:50px;">
-            <p style="color:var(--accent); font-family:monospace;">YUSUFXON PRO • 2026</p>
+        <footer style="padding: 100px; text-align: center;">
+            <p style="color:var(--accent); letter-spacing: 5px;">YUSUFXON PRO • JIZZAX SHAHRI • 2026</p>
         </footer>
     </div>
 
+    <div class="side side-l"><div class="v-line"></div></div>
+    <div class="side side-r"><div class="v-line"></div></div>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000 });
+        AOS.init({ duration: 1200 });
 
         window.onload = () => {
             setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('content').style.opacity = '1';
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').style.opacity = '1';
+                }, 1000);
             }, 3000);
         };
 
-        // HTML Typing Animation
-        const txt = "> HTML tuzilmasi muvaffaqiyatli yuklandi...\n> YusufxonPro interfeysi tayyor.";
-        let i = 0;
-        let started = false;
+        // HTML Typing Effect
+        const msg = "> Jizzax shahri IT-tizimi ishga tushirildi...\n> YusufxonPro interfeysi 100% tayyor.";
+        let idx = 0;
+        let running = false;
 
-        function typeWriter() {
-            if (i < txt.length) {
-                document.getElementById("html-run-text").innerHTML += txt.charAt(i) === "\n" ? "<br>" : txt.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
+        function runType() {
+            if (idx < msg.length) {
+                document.getElementById("html-status").innerHTML += msg.charAt(idx) === "\n" ? "<br>" : msg.charAt(idx);
+                idx++;
+                setTimeout(runType, 40);
             }
         }
 
         window.addEventListener('scroll', () => {
-            const h = document.getElementById('html-studio');
-            if(h && window.scrollY > h.offsetTop - 400 && !started) {
-                started = true;
-                typeWriter();
+            const studio = document.getElementById('html-studio');
+            if(studio && window.scrollY > studio.offsetTop - 450 && !running) {
+                running = true;
+                setTimeout(runType, 800);
             }
         });
     </script>
