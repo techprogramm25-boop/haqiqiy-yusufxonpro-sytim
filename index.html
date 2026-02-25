@@ -3,446 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>YusufxonPro.uz</title>
-    
-    <meta name="description" content="Yusufxon Axmatov (YusufxonPro) - 11 yoshli daho dasturchi. Jizzaxdan turib professional web-saytlar va AI tizimlar yaratadi.">
-    <meta name="keywords" content="Yusufxon Axmatov, Yusufxon Pro, yusufxonpro.uz, Daho Dev, daho dasturchi, Jizzax IT, dasturchi bolakay, full-stack developer">
-    <meta name="author" content="Yusufxon Axmatov">
-    <link rel="canonical" href="https://yusufxonpro.uz/">
-
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
-
-    <meta property="og:title" content="YusufxonPro.uz | Daho Dev Portfolio">
-    <meta property="og:description" content="11 yoshli daho dasturchi Yusufxon Axmatovning professional portfoliosi.">
-    <meta property="og:url" content="https://yusufxonpro.uz">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="android-chrome-512x512.png"> <meta name="robots" content="index, follow">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Yusufxon Axmatov",
-      "alternateName": "YusufxonPro",
-      "url": "https://yusufxonpro.uz",
-      "image": "https://yusufxonpro.uz/android-chrome-512x512.png",
-      "jobTitle": "Full-stack Developer",
-      "description": "11 yoshli daho dasturchi va YusufxonPro.uz asoschisi.",
-      "knowsAbout": ["Python", "Web Development", "Artificial Intelligence"],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Jizzax",
-        "addressCountry": "UZ"
-      }
-    }
-    </script>
-    
+    <title>YusufxonPro.uz | HTML Daho</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         :root { 
-            --bg: #010409; 
-            --accent: #00ff88; 
-            --text: #8b949e; 
-            --white: #f0f6fc; 
-            --card: rgba(22, 27, 34, 0.8); 
-            --red: #ff4d4d; 
-            --gold: #ffb700;
-            --blue: #58a6ff;
-            --glow: 0 0 20px rgba(0, 255, 136, 0.3);
+            --bg: #010409; --accent: #00ff88; --text: #8b949e; --white: #f0f6fc; 
+            --card: rgba(22, 27, 34, 0.8); --red: #ff4d4d; --blue: #58a6ff;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            overflow-x: hidden; 
-            scroll-snap-type: y mandatory;
-        }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-snap-type: y mandatory; }
 
-        /* --- DAHO ULTRA LOADER --- */
-        #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Loader & Elements (Oldindan borlari) */
+        #loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 1s; }
         .loader-ring { width: 140px; height: 140px; border: 2px solid rgba(0, 255, 136, 0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; position: absolute; }
-        .char { position: absolute; font-size: 70px; font-weight: 900; opacity: 0; filter: blur(5px); }
-        .b { color: var(--accent); animation: fI 0.5s 1s forwards, fO 0.5s 2s forwards; }
-        .x { color: var(--red); animation: fI 0.4s 2.2s forwards, fO 0.3s 3s forwards; }
-        .y { color: var(--accent); animation: fI 0.5s 3.2s forwards; text-shadow: 0 0 30px var(--accent); }
-        .f-name { margin-top: 180px; color: var(--white); letter-spacing: 15px; opacity: 0; animation: fI 1s 4s forwards; font-size: 14px; font-family: monospace; }
-
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes fI { to { opacity: 1; filter: blur(0); } }
-        @keyframes fO { to { opacity: 0; transform: scale(1.5); filter: blur(10px); } }
+        
+        section { height: 100vh; width: 100vw; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; padding: 0 15%; position: relative; }
+        .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
+        .title { color: var(--white); font-size: clamp(40px, 8vw, 90px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; }
 
-        .glow-sphere { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0, 255, 136, 0.05) 0%, transparent 70%); z-index: -1; pointer-events: none; }
+        /* HTML STUDIO STYLE */
+        .html-studio { background: radial-gradient(circle at top left, rgba(0, 255, 136, 0.03), transparent); }
+        .editor-container { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        
+        .vscode-html { 
+            background: #0d1117; border: 1px solid #30363d; border-radius: 15px; overflow: hidden; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Fira Code', monospace;
+        }
+        .v-header { background: #161b22; padding: 10px 20px; display: flex; gap: 8px; }
+        .v-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .v-body { padding: 20px; font-size: 15px; line-height: 1.5; color: #e6edf3; min-height: 280px; }
+        
+        .tag { color: #7ee787; } /* HTML Tags */
+        .attr { color: #79c0ff; } /* Attributes */
+        .val { color: #a5d6ff; }  /* Values */
+        .cursor { border-left: 2px solid var(--accent); animation: blink 0.8s infinite; margin-left: 3px; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- SIDEBARS --- */
+        /* DAHO IMAGE EFFECT */
+        .daho-img-box { position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #30363d; transition: 0.5s; }
+        .daho-img { 
+            width: 100%; display: block; 
+            filter: grayscale(100%) blur(2px); /* Qora-oq va xira */
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(1.05);
+        }
+        .daho-img-box:hover .daho-img { 
+            filter: grayscale(0%) blur(0px); /* Asl holat */
+            transform: scale(1);
+        }
+        .daho-img-box:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); }
+
+        /* Sidebars & Buttons */
         .side { position: fixed; bottom: 0; display: flex; flex-direction: column; align-items: center; z-index: 500; }
         .side-l { left: 40px; } .side-r { right: 40px; }
-        .social a { color: var(--text); font-size: 24px; margin-bottom: 30px; transition: 0.4s ease; text-decoration: none; display: block; }
-        .social a:hover { color: var(--accent); transform: translateY(-8px); filter: drop-shadow(var(--glow)); }
         .v-line { width: 1px; height: 150px; background: linear-gradient(transparent, var(--accent)); }
+        .btn { padding: 15px 35px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.4s; }
+        .btn:hover { background: rgba(0, 255, 136, 0.1); box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
 
-        section { 
-            height: 100vh; 
-            width: 100vw; 
-            scroll-snap-align: start; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            padding: 0 15%; 
-            position: relative;
-        }
-
-        #content { opacity: 0; transition: 2s ease; }
-        .num { color: var(--accent); font-family: monospace; font-size: 18px; margin-bottom: 20px; display: block; letter-spacing: 3px; }
-        .title { color: var(--white); font-size: clamp(45px, 10vw, 110px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; letter-spacing: -3px; }
-        
-        .btn { 
-            padding: 20px 45px; 
-            border: 1px solid var(--accent); 
-            color: var(--accent); 
-            background: transparent; 
-            cursor: pointer; 
-            text-decoration: none; 
-            display: inline-block; 
-            font-weight: 900; 
-            transition: 0.5s; 
-            border-radius: 4px; 
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .btn:hover { background: rgba(0, 255, 136, 0.1); box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); transform: scale(1.05); }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
-        .card { 
-            background: var(--card); 
-            padding: 45px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.03); 
-            backdrop-filter: blur(20px); 
-            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); 
-        }
-        .card:hover { border-color: var(--accent); transform: translateY(-20px) scale(1.02); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5); }
-        .card h3 { color: var(--white); margin-bottom: 20px; font-size: 28px; font-weight: 800; }
-
-        input, textarea { width: 100%; padding: 20px; margin-bottom: 20px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 12px; outline: none; transition: 0.4s; font-size: 16px; }
-        input:focus, textarea:focus { border-color: var(--accent); background: #161b22; }
-
-        .term-icon { position: fixed; top: 40px; right: 50px; color: var(--accent); font-size: 35px; cursor: pointer; z-index: 2000; transition: 0.5s; filter: drop-shadow(var(--glow)); }
-        .term-icon:hover { transform: rotate(180deg) scale(1.2); color: var(--white); }
-        
-        #admin-panel { display: none; position: fixed; inset: 0; background: rgba(1, 4, 9, 0.98); z-index: 5000; padding: 10%; border-left: 8px solid var(--accent); backdrop-filter: blur(15px); }
-
-        footer { text-align: center; padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.03); }
-
-        #live-feed-box { margin-top: 30px; height: 300px; overflow-y: auto; padding-right: 10px; }
-        .feed-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 3px solid var(--accent); animation: slideIn 0.5s ease forwards; }
-        .feed-actions { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
-        .like-btn-feed { cursor: pointer; color: var(--text); transition: 0.3s; }
-        .like-btn-feed.active { color: var(--red); }
-        
-        .rating-stars { display: flex; gap: 10px; margin: 20px 0; cursor: pointer; }
-        .rating-stars i { font-size: 30px; color: #30363d; transition: 0.3s; }
-        .rating-stars i.active { color: var(--gold); text-shadow: 0 0 15px var(--gold); }
-
-        /* --- PYTHON DAHO STUDIO CSS --- */
-        .python-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle at bottom right, rgba(88, 166, 255, 0.05), transparent); }
-        .editor-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; margin-top: 30px; }
-        
-        .vscode-mockup { 
-            background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); font-family: 'Fira Code', monospace;
-        }
-        .vscode-header { background: #161b22; padding: 12px 20px; display: flex; gap: 8px; border-bottom: 1px solid #30363d; }
-        .v-dot { width: 12px; height: 12px; border-radius: 50%; }
-        
-        .vscode-body { padding: 25px; color: #e6edf3; font-size: 16px; line-height: 1.6; min-height: 250px; }
-        .py-keyword { color: #ff7b72; }
-        .py-func { color: #d2a8ff; }
-        .py-str { color: #a5d6ff; }
-        .py-cursor { border-left: 8px solid var(--accent); animation: pyblink 0.8s infinite; margin-left: 5px; }
-
-        .python-logo-mockup { 
-            position: relative; display: flex; justify-content: center; align-items: center; 
-            perspective: 1000px; padding: 20px;
-        }
-        .py-img { 
-            width: 100%; max-width: 250px; filter: drop-shadow(0 0 20px rgba(88, 166, 255, 0.3));
-            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
-        }
-        .python-logo-mockup:hover .py-img { 
-            transform: rotateY(180deg) rotateX(10deg) scale(1.1); 
-            filter: drop-shadow(0 0 40px var(--blue));
-        }
-
-        @keyframes pyblink { 50% { opacity: 0; } }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-        @media (max-width: 992px) { .editor-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 992px) { .editor-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div id="loader">
         <div class="loader-ring"></div>
-        <span class="char b">B</span>
-        <span class="char x">✕</span>
-        <span class="char y">Y</span>
-        <div class="f-name">YUSUFXON AXMATOV • DAHO SYSTEM</div>
-    </div>
-
-    <div class="term-icon" onclick="toggleAdmin()"><i class="fas fa-terminal"></i></div>
-
-    <div id="admin-panel">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #30363d; padding-bottom: 20px;">
-            <h2 style="color:var(--accent); font-family:monospace; font-size: 30px;">> DAHO_CORE_TERMINAL v2.0</h2>
-            <i class="fas fa-times" style="color:var(--red); cursor:pointer; font-size: 40px;" onclick="toggleAdmin()"></i>
-        </div>
-        <div style="margin-top:50px;">
-            <p style="color:var(--text); font-family:monospace; margin-bottom:20px;">Tizimga kirish uchun maxsus kalitni kiriting:</p>
-            <button class="btn" onclick="openVault()">TERMINALNI_OCHISH</button>
-        </div>
-        <div id="logs" style="margin-top:40px; display:none; color:var(--accent); font-family:monospace; background: #000; padding: 30px; border-radius: 15px; border: 1px solid #30363d;">
-            <p style="animation: blink 1s infinite;">> Ma'lumotlar bazasi yuklanmoqda...</p>
-            <div id="msg-list" style="color:white; margin-top:20px; font-size: 18px;"></div>
-        </div>
+        <h1 style="color:var(--accent); margin-top:180px; letter-spacing:10px; font-size:14px;">DAHO SYSTEM LOADING...</h1>
     </div>
 
     <div class="side side-l">
-        <div class="social">
-            <a href="https://github.com/techprogramm25-boop" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/yusufxonpro/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/Musilmana_y_a_xmat0v777" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-        </div>
-        <div class="v-line"></div>
-    </div>
-    <div class="side side-r">
-        <p style="writing-mode: vertical-rl; margin-bottom: 35px; color: var(--accent); font-family: monospace; letter-spacing: 5px; font-weight: bold;">TECHPROGRAMM25@GMAIL.COM</p>
+        <div style="color:var(--text); font-size:20px; margin-bottom:20px;"><i class="fab fa-github"></i></div>
         <div class="v-line"></div>
     </div>
 
-    <div id="content">
-        <div class="glow-sphere" style="top: -10%; right: -10%;"></div>
-
+    <div id="content" style="opacity:0; transition: 1.5s;">
         <section id="hero">
-            <span class="num" data-aos="fade-down">00. Xush kelibsiz</span>
-            <h1 class="title" data-aos="fade-right" data-aos-delay="200">Yusufxon<br><span style="color:var(--accent)">Axmatov.</span></h1>
-            <h2 class="title" style="color:var(--text); font-size: clamp(30px, 6vw, 60px);" data-aos="fade-right" data-aos-delay="400">Men kelajakni kodlayman.</h2>
-            <p style="max-width: 750px; font-size: 24px; line-height: 1.5; margin-bottom: 40px;" data-aos="fade-up" data-aos-delay="600">Men 11 yoshdaman. <b style="color:var(--white)">Jizzax</b> zaminidan turib, butun dunyo uchun daho darajasidagi algoritmlar va interfeyslar yarataman.</p>
-            <div data-aos="zoom-in" data-aos-delay="800"><a href="#history" class="btn">Daho olamiga kirish</a></div>
+            <span class="num">00. Salom</span>
+            <h1 class="title">Yusufxon <span style="color:var(--accent)">Axmatov</span></h1>
+            <p style="font-size:20px; max-width:600px;">11 yoshli daho dasturchi portfolioga xush kelibsiz.</p>
         </section>
 
-        <img src="android-chrome-512x512.png" alt="YusufxonPro Yusufxon Axmatov Daho Dev Jizzax" style="display:none;">
-
-        <section id="rating-section" style="background: rgba(0,0,0,0.2);">
-            <span class="num">01. Fikr-mulohaza</span>
-            <h2 class="title" style="font-size: 50px;">Dahoga baho bering</h2>
-            <div class="card" style="max-width: 600px;">
-                <p style="font-size: 20px;">Sizningcha ushbu daho portfolioga necha yulduz loyiq?</p>
-                <div class="rating-stars" id="star-container">
-                    <i class="fas fa-star" onclick="rateDaho(1)"></i>
-                    <i class="fas fa-star" onclick="rateDaho(2)"></i>
-                    <i class="fas fa-star" onclick="rateDaho(3)"></i>
-                    <i class="fas fa-star" onclick="rateDaho(4)"></i>
-                    <i class="fas fa-star" onclick="rateDaho(5)"></i>
-                </div>
-                <p id="rating-status" style="color: var(--accent); font-family: monospace;">Saytga baho berilmagan</p>
-            </div>
+        <section id="history" style="height:auto; padding: 100px 15%;">
+            <span class="num">01. Missiya</span>
+            <h2 class="title">Daho Yo'li</h2>
+            <p style="font-size:18px;">Men kodlar bilan dunyoni o'zgartiraman.</p>
         </section>
 
-        <section id="python-studio" class="python-section">
-            <span class="num">02. Texnologiya</span>
-            <h2 class="title" style="font-size: clamp(35px, 6vw, 70px);">Python <span style="color:var(--blue)">Daho</span> Studio</h2>
-            
-            <div class="editor-grid">
-                <div class="vscode-mockup" data-aos="fade-right">
-                    <div class="vscode-header">
+        <section id="html-studio" class="html-studio">
+            <span class="num">02. Web San'ati</span>
+            <h2 class="title">HTML <span style="color:var(--blue)">Daho</span> Studio</h2>
+
+            <div class="editor-container">
+                <div class="vscode-html" data-aos="fade-right">
+                    <div class="v-header">
                         <div class="v-dot" style="background:#ff5f56"></div>
                         <div class="v-dot" style="background:#ffbd2e"></div>
                         <div class="v-dot" style="background:#27c93f"></div>
-                        <span style="margin-left:15px; font-size:12px; opacity:0.5;">main.py - YusufxonPro</span>
                     </div>
-                    <div class="vscode-body">
-                        <div><span class="py-keyword">import</span> daho_ai</div>
-                        <div><span class="py-keyword">class</span> <span class="py-func">YusufxonSystem</span>:</div>
-                        <div>&nbsp;&nbsp;<span class="py-keyword">def</span> <span class="py-func">__init__</span>(self):</div>
-                        <div>&nbsp;&nbsp;&nbsp;&nbsp;self.status = <span class="py-str">"Daho"</span></div>
+                    <div class="v-body">
+                        <div><span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"daho-system"</span><span class="tag">&gt;</span></div>
+                        <div style="padding-left:20px;"><span class="tag">&lt;h1&gt;</span>YusufxonPro Kelajakni Yaratadi<span class="tag">&lt;/h1&gt;</span></div>
+                        <div style="padding-left:20px;"><span class="tag">&lt;p&gt;</span>Kod - bu mening san'atim.<span class="tag">&lt;/p&gt;</span></div>
+                        <div style="padding-left:20px;"><span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="val">"launch()"</span><span class="tag">&gt;</span>Start<span class="tag">&lt;/button&gt;</span></div>
+                        <div><span class="tag">&lt;/div&gt;</span></div>
                         <br>
-                        <div style="color: #8b949e;"># Natijani ko'rish:</div>
-                        <div id="py-output" style="color: var(--accent); font-weight: bold; display:inline;"></div><span class="py-cursor"></span>
+                        <div style="color:var(--accent); font-family:monospace;" id="html-run-text"></div><span class="cursor"></span>
                     </div>
                 </div>
 
-                <div class="python-logo-mockup" data-aos="zoom-in">
-                    <img src='https://i.postimg.cc/3xHSt4jp/python-logo-vector-download-free-11574197219exgflzvtyd.png' 
-                         alt='Python Daho Logo' class="py-img">
+                <div class="daho-img-box" data-aos="zoom-in">
+                    <img src="https://i.postimg.cc/FzkvVdyS/Gemini-Generated-Image-4g2tz44g2tz44g2t.png" alt="Yusufxon Axmatov" class="daho-img">
                 </div>
             </div>
         </section>
 
-        <section id="history">
-            <div class="glow-sphere" style="bottom: 0; left: -10%; background: radial-gradient(circle, rgba(88, 166, 255, 0.05) 0%, transparent 70%);"></div>
-            <span class="num">03. Missiya</span>
-            <h2 class="title" style="font-size: clamp(40px, 7vw, 80px);">Daho Yo'li</h2>
-            <div class="grid">
-                <div class="card" data-aos="fade-up">
-                    <i class="fas fa-rocket" style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
-                    <h3>Erta Qadam</h3>
-                    <p style="font-size: 18px;">Dasturlash men uchun shunchaki kasb emas, bu mening ona tilim. Men kodlar bilan gaplashaman.</p>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-globe" style="font-size: 40px; color: var(--blue); margin-bottom: 20px;"></i>
-                    <h3>Global Maqsad</h3>
-                    <p style="font-size: 18px;">O'zbekistonning IT quvvatini dunyo xaritasida eng yuqori cho'qqiga olib chiqish — mening asosiy vazifam.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="kabinet">
-            <span class="num">04. Aloqa & Feed</span>
-            <h2 class="title" style="font-size: clamp(40px, 7vw, 80px);">Bog'lanish</h2>
-            <div class="grid">
-                <div class="card" data-aos="fade-up">
-                    <h3 style="margin-bottom:25px;">Xabar yuborish</h3>
-                    <input type="text" id="sender" placeholder="To'liq ismingiz">
-                    <textarea id="message" rows="5" placeholder="Sizni qanday daho g'oyalar qiynamoqda?"></textarea>
-                    <button class="btn" style="width:100%;" onclick="sendData()">XABARNI YUBORISH</button>
-                </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="200">
-                    <h3 style="margin-bottom:25px;"><i class="fas fa-rss"></i> Live Feed</h3>
-                    <div id="live-feed-box"></div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p style="color:var(--accent); font-family:monospace; letter-spacing: 10px; font-size: 18px; font-weight: bold;">YUSUFXON AXMATOV • DAHO • 2026</p>
-            <p style="margin-top: 20px; font-size: 12px; opacity: 0.5;">BARCHA HUQUQLAR HIMOYaLANGAN</p>
+        <footer style="text-align:center; padding:50px;">
+            <p style="color:var(--accent); font-family:monospace;">YUSUFXON PRO • 2026</p>
         </footer>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        let messages = JSON.parse(localStorage.getItem('daho_msgs')) || [];
-        let siteRating = localStorage.getItem('daho_rating') || 0;
+        AOS.init({ duration: 1000 });
 
-        AOS.init({ duration: 1200, once: false, mirror: true });
-        
         window.onload = () => {
-            renderFeed();
-            if(siteRating > 0) updateStars(siteRating);
             setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                loader.style.transform = 'translateY(-100%)';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    document.getElementById('content').style.opacity = '1';
-                }, 1000);
-            }, 5500);
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.opacity = '1';
+            }, 3000);
         };
 
-        // PYTHON STUDIO ANIMATION
-        const pyText = "> YusufxonPro algoritmi ishga tushdi...\n> Kelajak kodi muvaffaqiyatli yaratildi!";
-        let pyIdx = 0;
-        let isTyping = false;
+        // HTML Typing Animation
+        const txt = "> HTML tuzilmasi muvaffaqiyatli yuklandi...\n> YusufxonPro interfeysi tayyor.";
+        let i = 0;
+        let started = false;
 
-        function typePy() {
-            const out = document.getElementById("py-output");
-            if (pyIdx < pyText.length) {
-                out.innerHTML += pyText.charAt(pyIdx) === "\n" ? "<br>" : pyText.charAt(pyIdx);
-                pyIdx++;
-                setTimeout(typePy, 50);
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("html-run-text").innerHTML += txt.charAt(i) === "\n" ? "<br>" : txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
             }
         }
 
         window.addEventListener('scroll', () => {
-            const section = document.getElementById('python-studio');
-            if(section) {
-                const pos = section.getBoundingClientRect().top;
-                if(pos < window.innerHeight * 0.7 && !isTyping) {
-                    isTyping = true;
-                    setTimeout(typePy, 1000);
-                }
+            const h = document.getElementById('html-studio');
+            if(h && window.scrollY > h.offsetTop - 400 && !started) {
+                started = true;
+                typeWriter();
             }
         });
-
-        function renderFeed() {
-            const box = document.getElementById('live-feed-box');
-            box.innerHTML = messages.length ? messages.map((x, index) => `
-                <div class="feed-item">
-                    <b style="color:var(--white)">${x.s}</b>
-                    <p style="font-size: 14px; margin-top:5px;">${x.m}</p>
-                    <div class="feed-actions">
-                        <span class="like-btn-feed ${x.liked ? 'active' : ''}" onclick="likeMsg(${index})">
-                            <i class="fas fa-heart"></i> ${x.likes || 0}
-                        </span>
-                        <small style="opacity:0.4; font-size:10px;">${x.t}</small>
-                    </div>
-                </div>
-            `).join('') : "<p style='opacity:0.5'>Hozircha xabarlar yo'q.</p>";
-        }
-
-        function likeMsg(index) {
-            messages[index].likes = (messages[index].likes || 0) + (messages[index].liked ? -1 : 1);
-            messages[index].liked = !messages[index].liked;
-            localStorage.setItem('daho_msgs', JSON.stringify(messages));
-            renderFeed();
-        }
-
-        function rateDaho(n) {
-            siteRating = n;
-            localStorage.setItem('daho_rating', n);
-            updateStars(n);
-            document.getElementById('rating-status').innerText = "Rahmat! Siz " + n + " ball berdingiz.";
-        }
-
-        function updateStars(n) {
-            const stars = document.querySelectorAll('#star-container i');
-            stars.forEach((s, i) => {
-                s.classList.toggle('active', i < n);
-            });
-        }
-
-        function toggleAdmin() {
-            const p = document.getElementById('admin-panel');
-            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function sendData() {
-            const s = document.getElementById('sender').value;
-            const m = document.getElementById('message').value;
-            if(s && m) {
-                const newMsg = {s, m, t: new Date().toLocaleTimeString(), likes: 0, liked: false};
-                messages.unshift(newMsg);
-                localStorage.setItem('daho_msgs', JSON.stringify(messages));
-                renderFeed();
-                alert("Daho Yusufxon: Xabaringiz qabul qilindi!");
-                document.getElementById('sender').value = "";
-                document.getElementById('message').value = "";
-            } else {
-                alert("Iltimos, daho bilan gaplashish uchun barcha maydonlarni to'ldiring.");
-            }
-        }
-
-        function openVault() {
-            const pass = prompt("DAHO_CORE_KEY:");
-            if(pass === "20152015") {
-                document.getElementById('logs').style.display = 'block';
-                const l = document.getElementById('msg-list');
-                l.innerHTML = messages.map(x => `
-                    <div style="border-bottom:1px solid #30363d; padding:15px;">
-                        <span style="color:var(--accent)">[${x.t}]</span> <b>${x.s}:</b> ${x.m} (Likes: ${x.likes})
-                    </div>
-                `).join('');
-            } else { 
-                alert("XATO! SIZ DAHO EMASSIZ."); 
-            }
-        }
     </script>
 </body>
 </html>
