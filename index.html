@@ -23,7 +23,7 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;800&display=swap');
         
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -74,6 +74,9 @@
 
         .repo-card { transition: all 0.4s ease; border: 1px solid rgba(255,255,255,0.05); }
         .repo-card:hover { border-color: #0062ff; background: rgba(0, 98, 255, 0.1); transform: translateY(-5px); }
+        
+        .media-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.05); }
+        .media-card:hover { transform: translateY(-10px) scale(1.02); border-color: #0062ff; box-shadow: 0 30px 60px rgba(0, 98, 255, 0.2); }
     </style>
 </head>
 <body x-data="{ 
@@ -84,7 +87,6 @@
             setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; document.body.classList.add('loaded'); }, 800);
         }, 2500);
 
-        // Faqat eng oxirgi 6 ta repozitariyni olish
         fetch('https://api.github.com/users/techprogramm25-boop/repos?sort=updated')
             .then(res => res.json())
             .then(data => { this.githubRepos = data.slice(0, 6); });
@@ -112,9 +114,10 @@
                 <div class="w-12 h-12 bg-brand-blue rounded-2xl flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-blue-500/50">Y</div>
                 <span class="text-2xl font-black uppercase tracking-tighter">YUSUFXON<span class="text-brand-blue">PRO</span></span>
             </div>
-            <div class="hidden lg:flex gap-10 text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-400">
+            <div class="hidden lg:flex gap-8 text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-400">
                 <a href="#home" class="hover:text-white transition">Asosiy</a>
                 <a href="#github" class="hover:text-white transition">Loyihalar</a>
+                <a href="#media" class="hover:text-white transition">Ma'lumotlar</a>
                 <a href="#youtube" class="hover:text-white transition">YouTube</a>
                 <a href="#instagram" class="hover:text-white transition">Instagram</a>
                 <a href="#about" class="hover:text-white transition">Haqimda</a>
@@ -137,14 +140,14 @@
             </div>
             <div class="relative reveal">
                 <div class="absolute -inset-10 bg-brand-blue/30 blur-[120px] rounded-full animate-pulse"></div>
-                <img src="https://i.postimg.cc/gcZ56SRY/abotme.png" class="relative rounded-[5rem] border border-white/10 shadow-2xl w-full h-[650px] object-cover">
+                <img src="https://i.postimg.cc/gcZ56SRY/abotme.png" alt="YusufxonAxmatov" class="relative rounded-[5rem] border border-white/10 shadow-2xl w-full h-[650px] object-cover">
             </div>
         </div>
     </section>
 
     <section id="github" class="py-32 px-6 relative z-10">
         <div class="max-w-7xl mx-auto reveal">
-            <h2 class="text-6xl font-black uppercase italic mb-16 italic">Top <span class="text-brand-blue">Loyihalar</span></h2>
+            <h2 class="text-6xl font-black uppercase italic mb-16">Top <span class="text-brand-blue">Loyihalar</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <template x-for="repo in githubRepos" :key="repo.id">
                     <div class="repo-card glass p-10 flex flex-col justify-between h-[300px]">
@@ -155,6 +158,78 @@
                         <a :href="repo.html_url" target="_blank" class="text-brand-blue font-black text-xs uppercase tracking-widest hover:underline">Kodni ko'rish →</a>
                     </div>
                 </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- YANGILANGAN VA YANGI LINKLAR BILAN MEDIA BO'LIMI -->
+    <section id="media" class="py-32 px-6 relative z-10 bg-gradient-to-b from-transparent to-slate-950/40">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl font-black uppercase italic mb-4">Ma'lumotlar va <span class="text-brand-blue">Shaxsiy</span></h2>
+                <p class="text-slate-400 text-xl tracking-wide">YusufxonPro ekotizimining eng muhim va to'liq raqamli aktivlari</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- 1-fayl: Yuzimni yopgan kod -->
+                <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
+                    <div>
+                        <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
+                            <img src="https://i.postimg.cc/j5QbHyXZ/yuzimni-yopgan-kod.webp" alt="Yusufxon Axmatov - Yuzimni Yopgan Kod" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-3 uppercase italic tracking-wide">Yuzimni yopgan kod</h3>
+                        <p class="text-brand-blue font-bold tracking-widest text-xs mb-4 uppercase">Key: me face hide to code what ?</p>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Ushbu rasm YusufxonPro brendining eng sirli va kreativ vizual konsepsiyalaridan biridir. Dasturchining yuz qismi murakkab va funksional kod satrlari bilan berkitilgan bo'lib, bu raqamli dunyoda shaxsiyat va texnologiyaning uzviy bog'liqligini, dasturlash shunchaki ish emas, balki ijodkorning ajralmas qismi ekanligini anglatadi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2-fayl: Iconn -->
+                <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
+                    <div>
+                        <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
+                            <img src="https://i.postimg.cc/xTFS3fKP/iconn.webp" alt="Professional Web and Software Icons Collection" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-3 uppercase italic tracking-wide">Veb va dasturiy ta'minot</h3>
+                        <p class="text-emerald-400 font-bold tracking-widest text-xs mb-4 uppercase">Key: icons web for free</p>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Zamonaviy foydalanuvchi interfeyslari (UI/UX) uchun maxsus optimizatsiya qilingan, to'liq vektorli va yuqori aniqlikdagi ikonkalarning professional to'plami. Bu grafik elementlar veb-saytlar va Telegram bot interfeyslarini yanada jozibador, tushunarli va tez yuklanadigan qilish maqsadida ishlab chiqilgan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3-fayl: YusufxonPro Kim? -->
+                <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
+                    <div>
+                        <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
+                            <img src="https://i.postimg.cc/VkdmxrYK/yusufxonpro-kim.webp" alt="YusufxonPro Kim? Dasturchimi yoki AI?" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-3 uppercase italic tracking-wide">Daho Profil</h3>
+                        <p class="text-amber-400 font-bold tracking-widest text-xs mb-4 uppercase">Key: yusufxonpro kim dasturchimi yoki ai</p>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Yusufxon Axmatovning shaxsiy brendini yorituvchi infografik va vizual taqdimot fayli. Bu yerda uning full-stack dasturchilik salohiyati, sun'iy intellekt texnologiyalari bilan integratsiyalashgan loyihalari va uning raqamli olamdagi o'rni haqida batafsil ma'lumot berilgan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4-fayl: Python -->
+                <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
+                    <div>
+                        <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
+                            <img src="https://i.postimg.cc/wBD8zDnh/python-webp.webp" alt="Python Dasturlash Tili Haqida Ma'lumot" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        </div>
+                        <h3 class="text-3xl font-black text-white mb-3 uppercase italic tracking-wide">Python Texnologiyasi</h3>
+                        <p class="text-cyan-400 font-bold tracking-widest text-xs mb-4 uppercase">Key: python haqida</p>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            Dasturlash olamining eng kuchli tili hisoblangan Python tizimining arxitekturasi va uning aiogram kutubxonasi yordamida Telegram botlarini qurish mantiqi haqidagi infofayl. Bu material YusufxonPro tomonidan ishlab chiqilgan backend tizimlarining isbotidir.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -172,7 +247,7 @@
 
     <section id="instagram" class="py-32 px-6 relative z-10">
         <div class="max-w-7xl mx-auto reveal">
-            <h2 class="text-6xl font-black uppercase italic text-center mb-20 italic">Instagram <span class="text-brand-blue">Reels</span></h2>
+            <h2 class="text-6xl font-black uppercase italic text-center mb-20">Instagram <span class="text-brand-blue">Reels</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DW611U6Alvq/embed" class="w-full h-full" frameborder="0"></iframe></div>
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DTu8gXuiM1k/embed" class="w-full h-full" frameborder="0"></iframe></div>
@@ -190,7 +265,7 @@
                 <div class="space-y-10">
                     <h2 class="text-7xl font-black uppercase italic leading-none">Men <br><span class="text-brand-blue">Haqimda.</span></h2>
                     <p class="text-2xl text-slate-300 leading-relaxed">
-                        Mening ismim <span class="text-white font-bold">Yusufxon Axmatov</span>. 2015-yilda Jizzaxda tug'ilganman. Professional dasturlash va dizayn bilan shug'ullanaman.
+                        Mening ismim <span class="text-white font-bold">Yusufxon Axmatov</span>. Jizzaxda tug'ilganman. Professional darajada mukammal dasturlar, veb-saytlar va daho dizaynlar yaratish bilan shug'ullanaman.
                     </p>
                     <div class="flex flex-col gap-4">
                         <div class="flex items-center gap-6 glass p-6 border-white/10 hover:border-brand-blue transition">
