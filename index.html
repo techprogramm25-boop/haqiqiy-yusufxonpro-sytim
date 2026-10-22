@@ -23,7 +23,7 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;800;900&display=swap');
         
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -37,9 +37,9 @@
         body.loaded { opacity: 1; }
         
         .glass { 
-            background: rgba(15, 23, 42, 0.6); 
+            background: rgba(15, 23, 42, 0.7); 
             backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 2.5rem;
         }
 
@@ -66,8 +66,8 @@
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .video-container { transition: all 0.6s ease; border: 1px solid rgba(255,255,255,0.05); }
-        .video-container:hover { transform: scale(1.02); border-color: #0062ff; box-shadow: 0 30px 60px rgba(0,98,255,0.25); }
+        .video-container { transition: all 0.6s ease; border: 1px solid rgba(255,255,255,0.08); }
+        .video-container:hover { transform: scale(1.02); border-color: #0062ff; box-shadow: 0 30px 60px rgba(0,98,255,0.3); }
         
         .social-btn { transition: all 0.3s ease; }
         .social-btn:hover { transform: translateY(-5px); }
@@ -77,10 +77,127 @@
         
         .media-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.05); }
         .media-card:hover { transform: translateY(-10px) scale(1.02); border-color: #0062ff; box-shadow: 0 30px 60px rgba(0, 98, 255, 0.2); }
+
+        .site-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            will-change: transform;
+        }
+        .site-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: #0062ff;
+            box-shadow: 0 20px 40px -10px rgba(0, 98, 255, 0.3);
+        }
+        .preview-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #090d16;
+        }
+        .preview-iframe {
+            width: 1280px;
+            height: 800px;
+            border: 0;
+            transform-origin: 0 0;
+            pointer-events: none;
+            will-change: transform;
+            transition: opacity 0.5s ease;
+        }
+        .bounce-motion {
+            animation: bounceSubtle 2s ease-in-out infinite;
+        }
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* DISCO & WIN ANIMATION OVERLAY */
+        #disco-overlay {
+            position: fixed; inset: 0; z-index: 10000;
+            pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        #disco-overlay.active {
+            opacity: 1; pointer-events: auto;
+            animation: discoBg 0.15s infinite alternate;
+        }
+        @keyframes discoBg {
+            0% { background: rgba(255, 0, 128, 0.85); }
+            25% { background: rgba(0, 255, 255, 0.85); }
+            50% { background: rgba(255, 230, 0, 0.85); }
+            75% { background: rgba(0, 255, 64, 0.85); }
+            100% { background: rgba(153, 0, 255, 0.85); }
+        }
+        .win-title {
+            font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 0 20px #000, 0 0 40px #ff0077;
+            animation: zoomWin 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
+        }
+        @keyframes zoomWin {
+            0% { transform: scale(0.8) rotate(-5deg); }
+            100% { transform: scale(1.2) rotate(5deg); }
+        }
     </style>
 </head>
 <body x-data="{ 
     githubRepos: [],
+    webSites: [
+        {
+            title: 'YusufxonPro Rasmiy Platforma',
+            url: 'https://yusufxonpro.oneapp.dev/',
+            desc: 'YusufxonPro ekotizimining rasmiy bosh portfoli va interaktiv xabi.',
+            badge: 'TOP LOYIHA',
+            badgeBg: 'bg-brand-blue',
+            featured: true
+        },
+        {
+            title: '22-IDUM Maktab Veb-Sayti',
+            url: 'https://22-idum-uz.vercel.app/',
+            desc: 'Jizzax shahar 22-IDUM maktabining rasmiy va zamonaviy veb platformasi.',
+            badge: 'MAKTAB',
+            badgeBg: 'bg-emerald-600',
+            featured: false
+        },
+        {
+            title: 'TeamIT OneApp Platformasi',
+            url: 'https://teamit.oneapp.dev',
+            desc: 'TeamIT loyihasi uchun yaratilgan maxsus interaktiv platforma.',
+            badge: 'TEAM IT',
+            badgeBg: 'bg-purple-600',
+            featured: false
+        },
+        {
+            title: 'Laziza Azmatova Portfoliomi',
+            url: 'https://laziza-azmatova.vercel.app/',
+            desc: 'Individual UI/UX dizayn va yuqori tezlikka ega portfoliyo sayti.',
+            badge: 'PORTFOLIO',
+            badgeBg: 'bg-pink-600',
+            featured: false
+        },
+        {
+            title: 'YusufxonPro Loading Experience',
+            url: 'https://yusufxonpro-loading.vercel.app/',
+            desc: 'Kreativ animatsiyalar va yuklanish interfeysi konsepsiyasi.',
+            badge: 'ANIMATION',
+            badgeBg: 'bg-amber-600',
+            featured: false
+        },
+        {
+            title: 'Vercell Flax Web App',
+            url: 'https://vercell-flax.vercel.app/',
+            desc: 'Vercel infratuzilmasidagi tekor va zamonaviy veb ilova.',
+            badge: 'WEB APP',
+            badgeBg: 'bg-cyan-600',
+            featured: false
+        },
+        {
+            title: 'SuproBuxx Platformasi',
+            url: 'https://suprobuxx.oneapp.dev/',
+            desc: 'Keng funksional va zamonaviy ko\'rinishga ega interaktiv ilova.',
+            badge: 'PLATFORM',
+            badgeBg: 'bg-red-600',
+            featured: false
+        }
+    ],
     init() {
         setTimeout(() => {
             document.getElementById('loading-screen').style.opacity = '0';
@@ -98,6 +215,12 @@
     }
 }">
 
+    <!-- DISCO WIN OVERLAY -->
+    <div id="disco-overlay">
+        <div class="win-title italic uppercase tracking-tighter">🎉 YOU WIN! 🎉</div>
+        <div class="text-3xl font-black text-yellow-300 mt-4 tracking-widest uppercase italic animate-bounce">SAYTGA O'TILMOQDA... AAAAAA! 🕺💃</div>
+    </div>
+
     <div id="loading-screen">
         <div class="loading-logo italic uppercase tracking-tighter">Yusufxon<span class="text-brand-blue">Pro</span></div>
         <div class="text-slate-500 font-bold tracking-widest mt-4 uppercase text-xs">Tizim Yuklanmoqda...</div>
@@ -108,21 +231,25 @@
     <i class="fas fa-terminal side-icon left-20 bottom-1/4"></i>
     <i class="fas fa-globe side-icon right-20 bottom-1/3"></i>
 
-    <nav class="fixed top-0 w-full z-[100] glass py-5 px-10 mt-6 max-w-6xl left-1/2 -translate-x-1/2">
-        <div class="flex justify-between items-center">
-            <div class="flex items-center gap-3">
+    <!-- KATTAYTIRILGAN NAVIGATSIYA MENYUSI -->
+    <nav class="fixed top-0 w-full z-[100] glass py-5 px-8 mt-4 max-w-7xl left-1/2 -translate-x-1/2">
+        <div class="flex justify-between items-center gap-6">
+            <div class="flex items-center gap-3 shrink-0">
                 <div class="w-12 h-12 bg-brand-blue rounded-2xl flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-blue-500/50">Y</div>
-                <span class="text-2xl font-black uppercase tracking-tighter">YUSUFXON<span class="text-brand-blue">PRO</span></span>
+                <span class="text-2xl font-black uppercase tracking-tighter whitespace-nowrap">YUSUFXON<span class="text-brand-blue">PRO</span></span>
             </div>
-            <div class="hidden lg:flex gap-8 text-[11px] font-extrabold uppercase tracking-[0.2em] text-slate-400">
-                <a href="#home" class="hover:text-white transition">Asosiy</a>
-                <a href="#github" class="hover:text-white transition">Loyihalar</a>
-                <a href="#media" class="hover:text-white transition">Ma'lumotlar</a>
-                <a href="#youtube" class="hover:text-white transition">YouTube</a>
-                <a href="#instagram" class="hover:text-white transition">Instagram</a>
-                <a href="#about" class="hover:text-white transition">Haqimda</a>
+            
+            <div class="hidden lg:flex gap-7 text-sm font-black uppercase tracking-wider text-slate-300">
+                <a href="#home" class="hover:text-brand-blue transition whitespace-nowrap">Asosiy</a>
+                <a href="#websites" class="hover:text-brand-blue transition whitespace-nowrap">Veb Saytlar</a>
+                <a href="#github" class="hover:text-brand-blue transition whitespace-nowrap">GitHub</a>
+                <a href="#media" class="hover:text-brand-blue transition whitespace-nowrap">Ma'lumotlar</a>
+                <a href="#youtube" class="hover:text-brand-blue transition whitespace-nowrap">YouTube</a>
+                <a href="#instagram" class="hover:text-brand-blue transition whitespace-nowrap">Instagram</a>
+                <a href="#about" class="hover:text-brand-blue transition whitespace-nowrap">Haqimda</a>
             </div>
-            <button onclick="confetti()" class="bg-brand-blue text-white px-8 py-3 rounded-full text-xs font-black uppercase hover:scale-105 transition">🚀</button>
+            
+            <button onclick="confetti()" class="bg-brand-blue text-white px-8 py-3.5 rounded-full text-xs font-black uppercase hover:scale-105 transition shrink-0 shadow-lg shadow-blue-500/30">🚀</button>
         </div>
     </nav>
 
@@ -134,7 +261,7 @@
                     Jizzaxlik professional dasturchi va VBloger. Kelajak texnologiyalarini bugun yaratyapman.
                 </p>
                 <div class="flex flex-wrap gap-6">
-                    <a href="#github" class="bg-white text-black px-12 py-6 rounded-3xl font-black hover:bg-brand-blue hover:text-white transition-all duration-500 shadow-2xl uppercase tracking-wider">Loyihalarni Ko'rish</a>
+                    <a href="#websites" class="bg-white text-black px-12 py-6 rounded-3xl font-black hover:bg-brand-blue hover:text-white transition-all duration-500 shadow-2xl uppercase tracking-wider">Loyihalarni Ko'rish</a>
                     <a href="https://t.me/YusufxonPro1" target="_blank" class="glass px-12 py-6 rounded-3xl font-black transition-all uppercase tracking-wider border-2 border-white/10 text-center">Telegram</a>
                 </div>
             </div>
@@ -145,9 +272,69 @@
         </div>
     </section>
 
+    <!-- VEB SAYTLAR BO'LIMI -->
+    <section id="websites" class="py-32 px-6 relative z-10 bg-slate-950/30">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-6xl font-black uppercase italic mb-4">Jonli <span class="text-brand-blue">Veb Saytlar</span></h2>
+                    <p class="text-slate-400 text-xl">Ishlab chiqilgan barcha loyihalarning kichik interaktiv preview ko'rinishlari</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full">
+                    <span class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></span>
+                    <span class="text-xs font-black uppercase tracking-widest text-slate-300">Live Web Previews</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="(site, idx) in webSites" :key="idx">
+                    <div class="site-card glass rounded-[2.5rem] overflow-hidden flex flex-col justify-between group cursor-pointer"
+                         :class="site.featured ? 'md:col-span-2 lg:col-span-3 border-2 border-brand-blue/60 bg-gradient-to-r from-blue-950/30 to-slate-900/40' : ''"
+                         @click="triggerDiscoNav(site.url)">
+                        
+                        <div>
+                            <div class="preview-wrapper rounded-[2rem] m-4 border border-white/10 relative overflow-hidden"
+                                 :style="site.featured ? 'height: 380px;' : 'height: 220px;'">
+                                
+                                <iframe :src="site.url" 
+                                        class="preview-iframe rounded-[2rem]" 
+                                        :style="site.featured ? 'transform: scale(0.65); width: 153.8%; height: 153.8%;' : 'transform: scale(0.32); width: 312.5%; height: 312.5%;'"
+                                        loading="lazy" 
+                                        tabindex="-1"></iframe>
+
+                                <div class="absolute inset-0 bg-transparent group-hover:bg-brand-blue/10 transition-colors duration-300"></div>
+
+                                <div class="absolute top-4 left-4 z-10">
+                                    <span :class="site.badgeBg" class="text-white text-[10px] font-black uppercase px-4 py-2 rounded-full tracking-widest shadow-lg">
+                                        <span x-text="site.badge"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="px-8 pt-4 pb-6">
+                                <h3 class="font-black text-white uppercase italic mb-2 group-hover:text-brand-blue transition-colors duration-300"
+                                    :class="site.featured ? 'text-3xl' : 'text-2xl'" x-text="site.title"></h3>
+                                <p class="text-slate-400 text-xs leading-relaxed" x-text="site.desc"></p>
+                            </div>
+                        </div>
+
+                        <div class="px-8 pb-8 pt-2 flex justify-between items-center border-t border-white/5">
+                            <span class="text-[11px] font-mono text-slate-500 truncate max-w-[180px]" x-text="site.url"></span>
+                            <div class="bounce-motion bg-brand-blue text-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-2 group-hover:bg-white group-hover:text-black transition-all">
+                                <span>O'tish</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB BO'LIMI -->
     <section id="github" class="py-32 px-6 relative z-10">
         <div class="max-w-7xl mx-auto reveal">
-            <h2 class="text-6xl font-black uppercase italic mb-16">Top <span class="text-brand-blue">Loyihalar</span></h2>
+            <h2 class="text-6xl font-black uppercase italic mb-16">GitHub <span class="text-brand-blue">Kodlar</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <template x-for="repo in githubRepos" :key="repo.id">
                     <div class="repo-card glass p-10 flex flex-col justify-between h-[300px]">
@@ -162,7 +349,7 @@
         </div>
     </section>
 
-    <!-- YANGILANGAN VA YANGI LINKLAR BILAN MEDIA BO'LIMI -->
+    <!-- MEDIA BO'LIMI -->
     <section id="media" class="py-32 px-6 relative z-10 bg-gradient-to-b from-transparent to-slate-950/40">
         <div class="max-w-7xl mx-auto reveal">
             <div class="text-center mb-20">
@@ -171,7 +358,6 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-12">
-                <!-- 1-fayl: Yuzimni yopgan kod -->
                 <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
                     <div>
                         <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
@@ -186,7 +372,6 @@
                     </div>
                 </div>
 
-                <!-- 2-fayl: Iconn -->
                 <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
                     <div>
                         <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
@@ -201,7 +386,6 @@
                     </div>
                 </div>
 
-                <!-- 3-fayl: YusufxonPro Kim? -->
                 <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
                     <div>
                         <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
@@ -216,7 +400,6 @@
                     </div>
                 </div>
 
-                <!-- 4-fayl: Python -->
                 <div class="media-card glass overflow-hidden flex flex-col p-8 justify-between">
                     <div>
                         <div class="rounded-[2rem] overflow-hidden mb-6 h-[350px] border border-white/5 relative group">
@@ -245,16 +428,19 @@
         </div>
     </section>
 
+    <!-- YANGILANGAN INSTAGRAM REELS BO'LIMI (SIZ BERGAN YANGI REEL BILAN) -->
     <section id="instagram" class="py-32 px-6 relative z-10">
         <div class="max-w-7xl mx-auto reveal">
             <h2 class="text-6xl font-black uppercase italic text-center mb-20">Instagram <span class="text-brand-blue">Reels</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Yangi qo'shilgan siz bergan Reel linki -->
+                <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DeZ-9ati44K/embed" class="w-full h-full" frameborder="0"></iframe></div>
+                
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DW611U6Alvq/embed" class="w-full h-full" frameborder="0"></iframe></div>
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DTu8gXuiM1k/embed" class="w-full h-full" frameborder="0"></iframe></div>
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DWmfk27AjJa/embed" class="w-full h-full" frameborder="0"></iframe></div>
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DWwLrBOgrmo/embed" class="w-full h-full" frameborder="0"></iframe></div>
                 <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DW6tf6NAln2/embed" class="w-full h-full" frameborder="0"></iframe></div>
-                <div class="video-container glass overflow-hidden h-[600px]"><iframe src="https://www.instagram.com/p/DWk-lspglZv/embed" class="w-full h-full" frameborder="0"></iframe></div>
             </div>
         </div>
     </section>
@@ -293,5 +479,59 @@
         </p>
     </footer>
 
+    <!-- DISCO SOUND & NAVIGATION SCRIPT -->
+    <script>
+        function triggerDiscoNav(targetUrl) {
+            const disco = document.getElementById('disco-overlay');
+            disco.classList.add('active');
+
+            if (typeof confetti === 'function') {
+                const duration = 3 * 1000;
+                const end = Date.now() + duration;
+                (function frame() {
+                    confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 } });
+                    confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 } });
+                    if (Date.now() < end) requestAnimationFrame(frame);
+                })();
+            }
+
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                
+                const playFunnyBeat = () => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150 + Math.random() * 600, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800 + Math.random() * 400, ctx.currentTime + 0.15);
+
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.2);
+                };
+
+                let beatInterval = setInterval(playFunnyBeat, 100);
+
+                setTimeout(() => {
+                    clearInterval(beatInterval);
+                    ctx.close();
+                }, 3000);
+            } catch(e) {
+                console.log("Audio Error: ", e);
+            }
+
+            setTimeout(() => {
+                disco.classList.remove('active');
+                window.open(targetUrl, '_blank');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
